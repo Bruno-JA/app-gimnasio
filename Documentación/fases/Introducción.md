@@ -1,13 +1,20 @@
 ## 1. Planteamiento del problema y justificación
 >[!info] Describir claramente el problema a resolver, la relevancia del proyecto y las razones que justifican su desarrollo.
 
-Cuando se quiere mejor en una disciplina deportiva, es esencial llevar un correcto seguimiento del rendimiento, los métodos tradicionales de boli y papel o de meter todo en las notas del móvil son lentos, no siguen una estructura y, dependiendo de la persona, pueden acabar haciendo más mal que bien.
+Cuando se quiere mejorar en una disciplina deportiva, es esencial llevar un correcto seguimiento del rendimiento y el progreso. Los métodos tradicionales de boli y papel o de meter todo en las notas del móvil son lentos, no siguen una estructura y, dependiendo de la persona, pueden acabar haciendo más mal que bien.
 
-En mi caso, yo antes llevaba un registro por medio de hojas de cálculo que rellenaba en mi teléfono, la cosa es que si un día conseguía levantar mas en un ejercicio, me tocaba sobrescribir mi récord anterior, por lo que no era muy práctico y a su vez incorporar funcionalidades nuevas para añadir registros distintos era un incordio. Si quería actualizar mi peso necesitaba una aplicación a parte, y esta tenía que estar conectada a una pulsera deportiva o de lo contrario, no permitía modificar o añadir nada.
+Por otra parte las aplicaciones existentes deportivas son copias la una de la otra, suelen tener limitaciones, no son lo suficientemente flexibles y en todas el foco principal es hacer ejercicios, dejando de lado o quitando valor a los datos que proporciona el entrenamiento.
 
-Todas las aplicaciones de entrenamiento que encontraba seguían la misma estructura: _"Toma, distintos ejercicios con un temporizador, hazlos durante el tiempo que te indican"_ ninguna tenía el tipo de filosofía que buscaba, y un día entrenando se me ocurrió simplemente crearla yo mismo.
+De esta forma, el usuario no tiene la información que necesita para saber si lo está haciendo bien, si ha mejorado con respecto al mes pasado, etc.
+
+Por mi propia experiencia, se lo importante y valioso que es saber como de bien estás entrenando, te motiva y puedes ver claramente que tu rendimiento está aumentando, es por ello que creando una metodología que haga sencillo e intuitivo el registro de los datos durante el entrenamiento que el usuario podrá ver una mejora significativa en su progreso.
 
 ## 2. Objetivos del proyecto
 >[!info] Establecer los objetivos generales y específicos del proyecto, indicando qué se pretende lograr.
 
-Con esta aplicación lo que quiero es que el proceso de añadir y seguir el progreso atlético sea intuitivo, sencillo y rápido, que el usuario solo tenga que preocuparse de entrenar y la aplicación se encargue del resto. A su vez, que el usuario pueda aprender con recursos accesibles y de calidad mediante un portal educativo es esencial para toda aquella persona que quiera tener mejoras visibles en su entrenamiento.
+## Objetivos generales
+- Desarrollar una aplicación de entrenamiento adaptable a todo tipo de actividad deportiva.
+## Objetivos específicos
+- Crear una metodología que haga fácil, intuitivo y rápido el proceso de registro de entrenamientos.
+- Darle al usuario un amplio abanico de herramientas para incorporar en sus entrenamientos diarios, pudiendo volcar la información de estas dentro del registro diario.
+- Ofrecer un portal de aprendizaje donde poder aprender, consultar y guardar ejercicios que le interesen al usuario.
