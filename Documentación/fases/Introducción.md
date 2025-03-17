@@ -18,3 +18,71 @@ Por mi experiencia, se lo importante y valioso que es saber cómo estás entrena
 - Crear e incorporar en la aplicación una metodología que haga fácil, intuitivo y rápido el proceso de registro de entrenamientos.
 - Darle al usuario un amplio abanico de herramientas para incorporar en sus entrenamientos.
 - Ofrecer un portal de aprendizaje donde poder aprender, consultar y guardar ejercicios que le interesen al usuario.
+
+## 3. Diagrama de Gantt
+A continuación, se presenta el diagrama de Gantt que especifica el tiempo de desarrollo para completar la aplicación web.
+```mermaid
+gantt
+
+    title Tiempo de desarrollo
+
+    dateFormat  DD-MM-YYYY
+
+    axisFormat  %d-%m-%Y
+
+    excludes saturday
+
+    todayMarker off
+
+    section Introducción
+
+        Planteamiento del problema y justificación  :done, 14-03-2025, 2d
+
+        Objetivos generales y Específicos           :done, 14-03-2025, 3d
+
+        Diagrama de Gantt                           :active, 17-03-2025, 1d
+
+        Resumen Bilingüe                            :active, 17-03-2025, 1d
+
+    section Análisis
+
+        Requisitos funcionales y no funcionales :q1, 18-03-2025, 2d
+
+        Estudio del arte                        :a1, 18-03-2025, 3d
+
+        justificación de viabilidad             :after a1, 2d
+
+    section Diseño
+
+        Árbol de navegación :1d
+
+        Wireframe-prototipo :3d
+
+        Diagramas BBDD      :2d
+
+        Casos de uso        :2d
+
+        Diagramas de clase  :01-04-2025, 2d
+
+    section Programación e indicadores de Calidad
+
+        Implementación                                  :crit,45d
+
+        Seguimiento                                     :crit,s1, 26-05-2025, 8d
+
+        Pruebas unitarias                               :26-05-2025, 8d
+
+        Pruebas de integración                          :26-05-2025, 8d
+
+        pruebas de sistema                              :26-05-2025, 8d
+
+        Software y tecnologías utilizadas               :i1, 03-04-2025, 3d
+
+        Arquitectura de la aplicación                   :after i1, 5d
+
+        Organización del código y Módulos principales   :37d
+
+  
+
+        Finalización del proyecto (04/06/2025)          :crit, milestone, 04-06-2025, 1d
+```
