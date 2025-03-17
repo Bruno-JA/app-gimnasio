@@ -7,14 +7,14 @@ Por otra parte las aplicaciones existentes deportivas son copias la una de la ot
 
 De esta forma, el usuario no tiene la información que necesita para saber si lo está haciendo bien, si ha mejorado con respecto al mes pasado, etc.
 
-Por mi propia experiencia, se lo importante y valioso que es saber como de bien estás entrenando, te motiva y puedes ver claramente que tu rendimiento está aumentando, es por ello que creando una metodología que haga sencillo e intuitivo el registro de los datos durante el entrenamiento que el usuario podrá ver una mejora significativa en su progreso.
+Por mi experiencia, se lo importante y valioso que es saber cómo estás entrenando, te motiva y puedes ver que tu rendimiento aumenta, por eso creando una metodología que haga sencillo e intuitivo el registro de los datos durante el entrenamiento que el usuario podrá ver una mejora significativa en su progreso.
 
 ## 2. Objetivos del proyecto
 >[!info] Establecer los objetivos generales y específicos del proyecto, indicando qué se pretende lograr.
 
 ## Objetivos generales
-- Desarrollar una aplicación de entrenamiento adaptable a todo tipo de actividad deportiva.
+- Desarrollar una aplicación de entrenamiento adaptada a una amplia gama de actividades deportivas con un enfoque en el seguimiento y registro de entrenamientos.
 ## Objetivos específicos
-- Crear una metodología que haga fácil, intuitivo y rápido el proceso de registro de entrenamientos.
-- Darle al usuario un amplio abanico de herramientas para incorporar en sus entrenamientos diarios, pudiendo volcar la información de estas dentro del registro diario.
+- Crear e incorporar en la aplicación una metodología que haga fácil, intuitivo y rápido el proceso de registro de entrenamientos.
+- Darle al usuario un amplio abanico de herramientas para incorporar en sus entrenamientos.
 - Ofrecer un portal de aprendizaje donde poder aprender, consultar y guardar ejercicios que le interesen al usuario.
