@@ -12,12 +12,14 @@ Por mi experiencia, se lo importante y valioso que es saber cómo estás entrena
 ## 2. Objetivos del proyecto
 >[!info] Establecer los objetivos generales y específicos del proyecto, indicando qué se pretende lograr.
 
-## Objetivos generales
+### Objetivos generales
 - Desarrollar una aplicación de entrenamiento adaptada a una amplia gama de actividades deportivas con un enfoque en el seguimiento y registro de entrenamientos.
-## Objetivos específicos
-- Crear e incorporar en la aplicación una metodología que haga fácil, intuitivo y rápido el proceso de registro de entrenamientos.
-- Darle al usuario un amplio abanico de herramientas para incorporar en sus entrenamientos.
-- Ofrecer un portal de aprendizaje donde poder aprender, consultar y guardar ejercicios que le interesen al usuario.
+### Objetivos específicos
+- Incorporar una metodología que haga fácil, intuitivo y rápido el proceso de registro de entrenamientos.
+- Añadir una sección con herramientas útiles para el entrenamiento.
+- Añadir un portal educativo para los entrenamientos.
+- Añadir una sección de configuración.
+- Crear una sección para el perfil del usuario.
 
 ## 3. Diagrama de Gantt
 A continuación, se presenta el diagrama de Gantt que especifica el tiempo de desarrollo para completar la aplicación web.
@@ -86,3 +88,4 @@ gantt
 
         Finalización del proyecto (04/06/2025)          :crit, milestone, 04-06-2025, 1d
 ```
+
