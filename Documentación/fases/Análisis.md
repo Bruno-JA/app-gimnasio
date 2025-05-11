@@ -4,21 +4,21 @@ En esta fase, el alumnado debe profundizar en los aspectos técnicos y conceptua
 
 ### Funcionales
 #### General
-- El usuario puede elegir utilizar la aplicación con o sin registrar una cuenta. En caso de no tener una, toda la información se guardará en la caché del navegador y no en la base de datos.
+- El usuario deberá registrar y acceder con una cuenta para poder emplear la aplicación.
 #### Perfil
-- El usuario podrá añadir información personal, la cual se mostrará en su perfil y, algunos datos (peso, altura, etc), se podrán emplear para la presentación y los cálculos dentro del seguimiento atlético. Algunas opciones estarán limitadas dependiendo de si el usuario tiene o no una cuenta de usuario.
+- El usuario podrá añadir información personal, la cual se mostrará en su perfil y, algunos datos (peso, altura, etc), se podrán emplear para la presentación y los cálculos dentro del seguimiento atlético. 
 #### Configuración
 - Se podrán realizar varios cambios tanto estéticos como funcionales dentro de la sección de configuración.
 #### Seguimiento
-- El usuario podrá crear el registro de sus entrenamientos desde la página de inicio seleccionando el día en el que ha entrenado en el calendario de entrenamiento.
-- Se podrá crear un nuevo registro de entrenamiento desde cualquier parte de la aplicación web mediate un botón. Al pulsarlo, dará la opción de registrar el día actual o seleccionar otro distinto.
-- Dentro del día a registrar, el usuario deberá elegir entre las plantillas de entrenamiento existentes, las que el mismo a creado o crear una nueva. Estas se rellenarán con los datos de los ejercicios realizados.
-- Los ejercicios del portal educativo que el usuario haya marcado como favoritos se podrán emplear para el seguimiento, haciendo que sea más fácil especificar que tipo de ejercicio se ha hecho y añadir la información.
+- El usuario podrá crear el registro de sus entrenamientos desde la página de inicio seleccionando el icono **+** situado en la parte superior derecha del calendario, donde se podrá elegir el día que se quiere registrar.
+- Se podrá crear un nuevo registro de entrenamiento desde cualquier parte de la aplicación web mediate el mismo icono **+** que se encuentra en la página del calendario.
+- Dentro del día a registrar, el usuario deberá elegir entre una de las plantillas de entrenamiento existentes. Estas se rellenarán con los datos de los ejercicios realizados.
+- Los ejercicios del portal educativo que el usuario haya marcado como favoritos se podrán emplear para el seguimiento, haciendo que sea más fácil encontrar el tipo de entrenamiento que se quiere realizar.
 #### Herramientas
-- Se dispondrá en todo momento de un desplegable con múltiples herramientas para ayudar con el entrenamiento (***volumen total levantado, One Rep Max, etc***). Estas herramientas se pueden incorporar en el seguimiento diario para añadir datos adicionales.
+- Se dispondrá en todo momento de un desplegable con múltiples herramientas de cálculo para ayudar con el entrenamiento (***volumen total levantado, One Rep Max, etc***). Estas herramientas se pueden incorporar en el seguimiento diario para añadir datos adicionales.
 #### Portal educativo
-- El usuario dispondrá de una barra de búsqueda y un desplegable con secciones para encontrar los ejercicios que busca.
-- El usuario podrá guardar ejercicios en  favoritos, permitiendo acceder a ellos directamente tanto en el perfil como desde la sección ***favoritos*** del portal educativo.
+- El usuario dispondrá de una barra de búsqueda para encontrar lo que necesita y un apartado con entrenamientos populares para un fácil acceso.
+- El usuario podrá guardar ejercicios en  favoritos, permitiendo acceder a ellos directamente tanto en el perfil como desde la sección ***favoritos*** dentro del portal educativo.
 - Dentro de un ejercicio, el usuario podrá leer la información de este y acceder a contenido multimedia como imágenes y vídeos.
 ### No funcionales
 - La aplicación debe ser funcional en cualquier navegador web moderno.
@@ -90,10 +90,10 @@ Inicialmente, la aplicación no tiene un objetivo comercial, ya que sería gratu
 ### Viabilidad operativa
 Aunque existen aplicaciones con un enfoque similar, no existe ninguna que:
 - Disponga de todas las características en una misma plataforma.
-- Den al usuario una amplia variedad de opciones y flexibilidad.
+- De al usuario una amplia variedad de opciones y flexibilidad.
 - Se enfoque en una gran variedad de disciplinar deportivas y la posibilidad de combinarlas.
 
-Ademas, la aplicación contaría con una buena recepción y éxito ya que:
+Además, la aplicación contaría con una buena recepción y éxito ya que:
 
 - El mercado se encuentra saturado con aplicaciones de deporte y ninguna cuenta con una herramienta robusta que de un enfoque general para muchas disciplinas deportivas.
 - Todas las aplicaciones te obligan a tener una cuenta creada y activa para poder emplearla.
