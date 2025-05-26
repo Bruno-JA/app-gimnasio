@@ -11,7 +11,7 @@
 - 📅 Calendario visual que muestra:
   - 🏋️‍♀️ Días con entrenamiento registrado.
   - 🔴 Días sin actividad.
-- 📚 Portal educativo con ejercicios de pesas conectados a la API de [WGER](https://wger.de/en/software/api/).
+- 📚 Portal educativo con ejercicios de pesas conectados a la API de [WGER](https://wger.de/es/software/api).
 - ⭐ Sistema de favoritos para acceder rápidamente a los ejercicios más usados.
 - 🧮 Herramientas de cálculo rápidas para 1RM, volumen total levantado, etc.
 
@@ -20,6 +20,6 @@
 ## ⚙️ Tecnologías utilizadas
 
 - **Frontend:** React + Vite + HTML + CSS
-- **Backend:** PHP (servido desde XAMPP)
+- **Backend:** PHP
 - **Base de datos:** MySQL
 - **API externa:** WGER (para datos de ejercicios)
