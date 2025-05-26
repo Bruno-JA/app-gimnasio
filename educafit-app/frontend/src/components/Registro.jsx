@@ -8,7 +8,8 @@ export default function Registro() {
     nombre: "",
   });
   const [mensaje, setMensaje] = useState("");
-
+  const [tipoMensaje, setTipoMensaje] = useState(""); // 'exito' o 'error'
+  
   const handleChange = (e) => {
     setDatosFormulario({ ...datosFormulario, [e.target.name]: e.target.value });
   };
@@ -16,6 +17,7 @@ export default function Registro() {
   const registrarUsuario = async (e) => {
     e.preventDefault();
     setMensaje("");
+    setTipoMensaje("");
 
     const res = await fetch("http://localhost/app-gimnasio/educafit-app/backend/registro.php", {
       method: "POST",
@@ -25,6 +27,7 @@ export default function Registro() {
 
     const data = await res.json();
     setMensaje(data.message);
+    setTipoMensaje(data.success ? "exito" : "error");
   };
 
   return (
@@ -36,7 +39,7 @@ export default function Registro() {
         <input type="password" name="contraseña" placeholder="Contraseña" value={datosFormulario.contraseña} onChange={handleChange} required />
         <button type="submit">Registrarse</button>
       </form>
-      {mensaje && <p>{mensaje}</p>}
+      {mensaje && <p className={`mensaje ${tipoMensaje}`}>{mensaje}</p>}
     </div>
   );
 }

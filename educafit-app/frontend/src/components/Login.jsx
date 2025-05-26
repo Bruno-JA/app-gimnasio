@@ -1,20 +1,22 @@
 import { useState } from "react";
 import './Registro.css';
 
-export default function Login({ onLoginSuccess }) {
+export default function Login({ alIniciarSesion }) {
   const [datosFormulario, setDatosFormulario] = useState({
     nombre_usuario: "",
     contraseña: ""
   });
   const [mensaje, setMensaje] = useState("");
+  const [tipoMensaje, setTipoMensaje] = useState(""); // 'exito' o 'error'
 
-  const handleChange = (e) => {
+  const cambiarCampo = (e) => {
     setDatosFormulario({ ...datosFormulario, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const enviarFormulario = async (e) => {
     e.preventDefault();
     setMensaje("");
+    setTipoMensaje("");
 
     const res = await fetch("http://localhost/app-gimnasio/educafit-app/backend/login.php", {
       method: "POST",
@@ -24,25 +26,25 @@ export default function Login({ onLoginSuccess }) {
 
     const data = await res.json();
 
+    setMensaje(data.message);
+    setTipoMensaje(data.success ? "exito" : "error");
+
     if (data.success) {
-      setMensaje("¡Bienvenido, " + data.usuario.nombre + "!");
       localStorage.setItem("usuario", JSON.stringify(data.usuario));
-      if (onLoginSuccess) onLoginSuccess(data.usuario);
-    } else {
-      setMensaje(data.message);
+      if (alIniciarSesion) alIniciarSesion(data.usuario);
     }
   };
 
   return (
     <div className="form-registro">
       <h2>Iniciar sesión</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={enviarFormulario}>
         <input
           type="text"
           name="nombre_usuario"
           placeholder="Nombre de usuario"
           value={datosFormulario.nombre_usuario}
-          onChange={handleChange}
+          onChange={cambiarCampo}
           required
         />
         <input
@@ -50,12 +52,12 @@ export default function Login({ onLoginSuccess }) {
           name="contraseña"
           placeholder="Contraseña"
           value={datosFormulario.contraseña}
-          onChange={handleChange}
+          onChange={cambiarCampo}
           required
         />
         <button type="submit">Entrar</button>
       </form>
-      {mensaje && <p>{mensaje}</p>}
+      {mensaje && <p className={`mensaje ${tipoMensaje}`}>{mensaje}</p>}
     </div>
   );
 }
