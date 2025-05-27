@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import Registro from "./components/Registro";
 import "./main.css"; // Asegúrate de importar tu CSS global
+import CalendarioEntrenamiento from "./components/CalendarioEntrenamiento";
 
 function App() {
   const [usuarioAutenticado, setUsuarioAutenticado] = useState(null);
@@ -48,12 +49,15 @@ function App() {
   }
 
   return (
-    <div className="contenedor-formulario">
-      <h1>Bienvenido, {usuarioAutenticado.nombre}</h1>
-      <p>Tu usuario es: {usuarioAutenticado.nombre_usuario}</p>
-      <button onClick={cerrarSesion}>Cerrar sesión</button>
-      {/* Aquí irá el resto de tu aplicación */}
-    </div>
+  <>
+      <div className="contenedor-formulario">
+        <h1>Bienvenido, {usuarioAutenticado.nombre}</h1>
+        <p>Tu usuario es: {usuarioAutenticado.nombre_usuario}</p>
+        <button onClick={cerrarSesion}>Cerrar sesión</button>
+        {/* Aquí irá el resto de tu aplicación */}
+      </div>
+      <CalendarioEntrenamiento />
+      </>
   );
 }
 
