@@ -50,7 +50,7 @@ function App() {
 
   return (
   <>
-      <div className="contenedor-formulario">
+      <div>
         <h1>Bienvenido, {usuarioAutenticado.nombre}</h1>
         <p>Tu usuario es: {usuarioAutenticado.nombre_usuario}</p>
         <button onClick={cerrarSesion}>Cerrar sesión</button>
