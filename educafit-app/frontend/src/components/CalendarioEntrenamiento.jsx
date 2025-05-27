@@ -12,7 +12,10 @@ function formatearFechaLocal(date) { // Formatea la fecha a YYYY-MM-DD y permite
 
 
 export default function CalendarioEntrenamiento() {
-    
+
+    const [entrenamientosCache, setEntrenamientosCache] = useState({});
+    // Estado para almacenar la fecha seleccionada y las fechas con entrenamiento, evitando llamar al backend en bucle
+
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date()); // Fecha actual como valor inicial
   const [fechasConEntrenamiento, setFechasConEntrenamiento] = useState([]); // Array para almacenar las fechas con entrenamiento
 
@@ -49,42 +52,58 @@ export default function CalendarioEntrenamiento() {
 useEffect(() => {
   if (!usuario) return;
 
-  const fecha = formatearFechaLocal(fechaSeleccionada);
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
 
-  // No consultar fechas futuras
   if (fechaSeleccionada > hoy) {
     setInfoEntrenamiento(null);
     return;
   }
 
+  const fecha = formatearFechaLocal(fechaSeleccionada);
+
+  // Si ya está en la caché, usamos lo que tenemos
+  if (entrenamientosCache[fecha]) {
+    setInfoEntrenamiento(entrenamientosCache[fecha]);
+    return;
+  }
+
+  // Si no está en la caché, lo pedimos al servidor
   fetch("http://localhost/app-gimnasio/educafit-app/backend/entrenamientoPorFecha.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       usuario_id: usuario.id,
-      fecha: fecha
+      fecha
     })
   })
     .then(res => res.json())
     .then(data => {
-      if (data.success) {
-        setInfoEntrenamiento(data.entrenamiento);
-      } else {
-        setInfoEntrenamiento(null);
-      }
+      const info = data.success ? data.entrenamiento : null;
+
+      // Actualiza estado con la nueva info
+      setInfoEntrenamiento(info);
+
+      // Almacena en caché
+      setEntrenamientosCache(prev => ({
+        ...prev,
+        [fecha]: info
+      }));
     });
 }, [fechaSeleccionada]);
 
+
   // Función para añadir 🏋️‍♀️ si hay entrenamiento en ese día
 function renderEmoji({ date, view }) {
-    if (view !== 'month') return null;
+    if (view !== "month") return null;
+
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0); // Normalizar la hora
     const fechaLocal = formatearFechaLocal(date);
+
     // Si la fecha es futura, no mostrar nada
     if (date > hoy) return null;
+
     return fechasConEntrenamiento.includes(fechaLocal) ? (
         <div style={{ textAlign: "center", fontSize: "1rem" }}>🏋️‍♀️</div>
     ) : (

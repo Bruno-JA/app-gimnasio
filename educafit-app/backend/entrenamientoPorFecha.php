@@ -1,4 +1,5 @@
 <?php
+// este fichero realiza la consulta de un entrenamiento por fecha y usuario y devuelve los datos del entrenamiento como por ejemplo el tipo de entrenamiento, ejercicios, series, repeticiones, etc.
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
