@@ -2,13 +2,8 @@ import { useState, useEffect } from 'react';
 import Calendar from 'react-calendar'; // componente de calendario
 import 'react-calendar/dist/Calendar.css';
 import './CalendarioEntrenamiento.css';
-
-function formatearFechaLocal(date) { // Formatea la fecha a YYYY-MM-DD y permite comparar correctamente la fecha de entrenamiento
-  const año = date.getFullYear();
-  const mes = String(date.getMonth() + 1).padStart(2, '0');
-  const día = String(date.getDate()).padStart(2, '0');
-  return `${año}-${mes}-${día}`;
-}
+import FormularioEntrenamiento from './FormularioEntrenamiento';
+import { formatearFechaLocal } from '../helpers/fechas'; // Importa la función para formatear fechas
 
 
 export default function CalendarioEntrenamiento() {
@@ -18,6 +13,7 @@ export default function CalendarioEntrenamiento() {
 
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date()); // Fecha actual como valor inicial
   const [fechasConEntrenamiento, setFechasConEntrenamiento] = useState([]); // Array para almacenar las fechas con entrenamiento
+  const [mostrarFormulario, setMostrarFormulario] = useState(false); // Nuevo estado
 
   const usuario = JSON.parse(localStorage.getItem("usuario")); // obtener ID del usuario logueado
 
@@ -124,7 +120,7 @@ return (
         <p style={{ marginTop: "1rem" }}>
             Día seleccionado: {fechaSeleccionada.toLocaleDateString()}
         </p>
-        {infoEntrenamiento && (
+        {infoEntrenamiento ? (
             <div className="info-entrenamiento">
                 <h3>Entrenamiento del {fechaSeleccionada.toLocaleDateString()}</h3>
                 <p>
@@ -145,6 +141,28 @@ return (
                     </p>
                 )}
             </div>
+        ) : (
+            // Mostrar mensaje y botón antes del formulario
+            fechaSeleccionada <= new Date().setHours(23,59,59,999) && (
+                !mostrarFormulario ? (
+                    <div style={{ marginTop: "1rem" }}>
+                        <p>No existe ningún entrenamiento para este día.</p>
+                        <button onClick={() => setMostrarFormulario(true)}>
+                            Añadir entrenamiento
+                        </button>
+                    </div>
+                ) : (
+                    <FormularioEntrenamiento
+                        fecha={fechaSeleccionada}
+                        usuarioId={usuario?.id}
+                        onEntrenamientoGuardado={() => {
+                            setInfoEntrenamiento(null);
+                            setEntrenamientosCache({});
+                            setMostrarFormulario(false);
+                        }}
+                    />
+                )
+            )
         )}
     </div>
 );
