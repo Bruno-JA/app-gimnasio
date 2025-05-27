@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { formatearFechaLocal } from '../helpers/fechas'; //
+import { formatearFechaLocal } from '../helpers/fechas';
 
 export default function FormularioEntrenamiento({ fecha, usuarioId, onGuardar }) {
   const [series, setSeries] = useState('');
   const [repeticiones, setRepeticiones] = useState('');
   const [peso, setPeso] = useState('');
+  const [nota, setNota] = useState('');
   const [mensaje, setMensaje] = useState('');
 
   const manejarEnvio = async (e) => {
@@ -21,7 +22,8 @@ export default function FormularioEntrenamiento({ fecha, usuarioId, onGuardar })
         fecha: fechaNormalizada,
         series,
         repeticiones_por_serie: repeticiones,
-        peso_utilizado: peso
+        peso_utilizado: peso,
+        notas: nota
       })
     });
 
@@ -57,6 +59,12 @@ export default function FormularioEntrenamiento({ fecha, usuarioId, onGuardar })
         value={peso}
         onChange={(e) => setPeso(e.target.value)}
         required
+      />
+      <input
+        type="text"
+        placeholder="Tipo de entrenamiento / nota"
+        value={nota}
+        onChange={(e) => setNota(e.target.value)}
       />
       <button type="submit">Guardar entrenamiento</button>
       {mensaje && <p>{mensaje}</p>}

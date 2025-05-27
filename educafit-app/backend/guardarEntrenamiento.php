@@ -2,9 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST");
-header("Content-Type: application/json");
-
-include 'db.php'; // Asegúrate de que este archivo establece correctamente $pdo
+include 'db.php';
 
 $datos = json_decode(file_get_contents("php://input"), true);
 
@@ -21,21 +19,20 @@ if (
 
 $usuario_id = $datos['usuario_id'];
 $fecha = $datos['fecha'];
-$series = intval($datos['series']);
-$repeticiones = intval($datos['repeticiones_por_serie']);
-$peso = floatval($datos['peso_utilizado']);
+$series = $datos['series'];
+$repeticiones = $datos['repeticiones_por_serie'];
+$peso = $datos['peso_utilizado'];
+$notas = isset($datos['notas']) ? $datos['notas'] : null;
 
-// Cálculo automático del peso total levantado
+// Calculamos el peso total levantado
 $peso_total = $series * $repeticiones * $peso;
 
 try {
-    $stmt = $pdo->prepare("
-        INSERT INTO entrenamientos (usuario_id, fecha, series, repeticiones_por_serie, peso_utilizado, peso_total_levantado)
-        VALUES (?, ?, ?, ?, ?, ?)
-    ");
-    $stmt->execute([$usuario_id, $fecha, $series, $repeticiones, $peso, $peso_total]);
+    $consulta = $pdo->prepare("INSERT INTO entrenamientos (usuario_id, fecha, series, repeticiones_por_serie, peso_utilizado, peso_total_levantado, notas)
+                               VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $consulta->execute([$usuario_id, $fecha, $series, $repeticiones, $peso, $peso_total, $notas]);
 
-    echo json_encode(["success" => true, "message" => "Entrenamiento guardado"]);
+    echo json_encode(["success" => true]);
 } catch (PDOException $e) {
-    echo json_encode(["success" => false, "message" => "Error al guardar entrenamiento"]);
+    echo json_encode(["success" => false, "message" => "Error al guardar en la base de datos"]);
 }
