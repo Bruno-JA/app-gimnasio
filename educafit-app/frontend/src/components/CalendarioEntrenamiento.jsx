@@ -13,37 +13,49 @@ export default function CalendarioEntrenamiento() {
 
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date()); // Fecha actual como valor inicial
   const [fechasConEntrenamiento, setFechasConEntrenamiento] = useState([]); // Array para almacenar las fechas con entrenamiento
-  const [mostrarFormulario, setMostrarFormulario] = useState(false); // Nuevo estado
+  const [mostrarFormulario, setMostrarFormulario] = useState(false); // Estado para mostrar u ocultar el formulario de entrenamiento
+  const [mesConsultado, setMesConsultado] = useState(null); // Estado para almacenar el mes consultado
 
   const usuario = JSON.parse(localStorage.getItem("usuario")); // obtener ID del usuario logueado
 
-  useEffect(() => { // Obtener las fechas de entrenamiento del mes seleccionado
-    if (usuario) {
-      const primerDiaDelMes = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth(), 1); // Primer día del mes seleccionado
-      const ultimoDiaDelMes = new Date(fechaSeleccionada.getFullYear(), fechaSeleccionada.getMonth() + 1, 0); // Último día del mes seleccionado
-      
-        const fecha_inicio = formatearFechaLocal(primerDiaDelMes);
-        const fecha_fin = formatearFechaLocal(ultimoDiaDelMes);
+  // Efecto para obtener las fechas con entrenamiento del mes seleccionado
+useEffect(() => {
+  if (!usuario) return;
 
-      fetch("http://localhost/app-gimnasio/educafit-app/backend/obtenerEntrenamientos.php", { // Obtener las fechas de entrenamiento del usuario
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          usuario_id: usuario.id, 
-          fecha_inicio,
-          fecha_fin
-        })
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            setFechasConEntrenamiento(data.fechas_entrenamiento);
-          }
-        });
-    }
-  }, [fechaSeleccionada, usuario])
+  const año = fechaSeleccionada.getFullYear();
+  const mes = fechaSeleccionada.getMonth();
+  const claveMes = `${año}-${mes}`; // Clave única para el mes (año-mes)
+
+  // Evita repetir la petición si ya consultamos este mes
+  if (mesConsultado === claveMes) return;
+
+  const primerDiaDelMes = new Date(año, mes, 1);
+  const ultimoDiaDelMes = new Date(año, mes + 1, 0);
+
+  const fecha_inicio = formatearFechaLocal(primerDiaDelMes);
+  const fecha_fin = formatearFechaLocal(ultimoDiaDelMes);
+
+  fetch("http://localhost/app-gimnasio/educafit-app/backend/obtenerEntrenamientos.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      usuario_id: usuario.id,
+      fecha_inicio,
+      fecha_fin
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        setFechasConEntrenamiento(data.fechas_entrenamiento);
+        setMesConsultado(claveMes); // Marcamos que ya hemos consultado este mes para evitar repetir la petición
+      }
+    });
+}, [fechaSeleccionada, usuario]);
+
   
   const [infoEntrenamiento, setInfoEntrenamiento] = useState(null);
+
 
 useEffect(() => {
   if (!usuario) return;
@@ -87,7 +99,6 @@ useEffect(() => {
       }));
     });
 }, [fechaSeleccionada]);
-
 
   // Función para añadir 🏋️‍♀️ si hay entrenamiento en ese día
 function renderEmoji({ date, view }) {
