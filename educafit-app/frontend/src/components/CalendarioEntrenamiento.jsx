@@ -100,6 +100,41 @@ useEffect(() => {
     });
 }, [fechaSeleccionada]);
 
+const eliminarEntrenamiento = async () => {
+  const fecha = formatearFechaLocal(fechaSeleccionada);
+  const confirmar = window.confirm(`¿Seguro que deseas eliminar el entrenamiento del ${fechaSeleccionada.toLocaleDateString()}?`);
+  if (!confirmar) return;
+
+  const res = await fetch("http://localhost/app-gimnasio/educafit-app/backend/eliminarEntrenamiento.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      usuario_id: usuario.id,
+      fecha
+    })
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    setInfoEntrenamiento(null);
+    setMostrarFormulario(false);
+
+    // Eliminar de la caché
+    setEntrenamientosCache(prev => {
+      const copia = { ...prev };
+      delete copia[fecha];
+      return copia;
+    });
+
+    // Eliminar del listado de fechas con entrenamiento (para quitar el emoji)
+    setFechasConEntrenamiento(prev => prev.filter(f => f !== fecha));
+  } else {
+    alert("No se pudo eliminar el entrenamiento.");
+  }
+};
+
+
   // Función para añadir 🏋️‍♀️ si hay entrenamiento en ese día
 function renderEmoji({ date, view }) {
     if (view !== "month") return null;
@@ -151,6 +186,9 @@ return (
             <strong>Notas:</strong> {infoEntrenamiento.notas}
           </p>
         )}
+        <button style={{ marginTop: "1rem" }} onClick={eliminarEntrenamiento}>
+      Eliminar entrenamiento
+    </button>
       </div>
     ) : (
       // Mostrar mensaje y botón antes del formulario
@@ -179,6 +217,8 @@ return (
               setMostrarFormulario(false); // oculta el formulario
             }}
           />
+
+          
         ))
     )}
   </div>
