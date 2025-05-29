@@ -42,7 +42,7 @@ export default function Login({ alIniciarSesion }) {
         <input
           type="text"
           name="nombre_usuario"
-          placeholder="Nombre de usuario"
+          placeholder="Usuario"
           value={datosFormulario.nombre_usuario}
           onChange={cambiarCampo}
           required
