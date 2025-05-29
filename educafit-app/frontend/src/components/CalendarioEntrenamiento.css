@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  aspect-ratio: 1; /* Mantiene la proporción cuadrada */
+  aspect-ratio: 1; /* Mantiene la proporción cuadrada del día */
   border-radius: 50%;
   overflow: hidden;
   text-align: center;
