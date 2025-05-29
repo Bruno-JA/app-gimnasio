@@ -8,13 +8,13 @@ import { formatearFechaLocal } from '../helpers/fechas'; // Importa la función 
 
 export default function CalendarioEntrenamiento() {
 
-    const [entrenamientosCache, setEntrenamientosCache] = useState({});
-    // Estado para almacenar la fecha seleccionada y las fechas con entrenamiento, evitando llamar al backend en bucle
-
+  const [entrenamientosCache, setEntrenamientosCache] = useState({});
+  // Estado para almacenar la fecha seleccionada y las fechas con entrenamiento, evitando llamar al backend en bucle
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date()); // Fecha actual como valor inicial
   const [fechasConEntrenamiento, setFechasConEntrenamiento] = useState([]); // Array para almacenar las fechas con entrenamiento
   const [mostrarFormulario, setMostrarFormulario] = useState(false); // Estado para mostrar u ocultar el formulario de entrenamiento
   const [mesConsultado, setMesConsultado] = useState(null); // Estado para almacenar el mes consultado
+  const [modoEdicion, setModoEdicion] = useState(false);
 
   const usuario = JSON.parse(localStorage.getItem("usuario")); // obtener ID del usuario logueado
 
@@ -166,61 +166,70 @@ return (
     <p style={{ marginTop: "1rem" }}>
       Día seleccionado: {fechaSeleccionada.toLocaleDateString()}
     </p>
-    {infoEntrenamiento ? (
+
+    {infoEntrenamiento && !modoEdicion ? (
       <div className="info-entrenamiento">
         <h3>Entrenamiento del {fechaSeleccionada.toLocaleDateString()}</h3>
-        <p>
-          <strong>Series:</strong> {infoEntrenamiento.series}
-        </p>
-        <p>
-          <strong>Repeticiones:</strong> {infoEntrenamiento.repeticiones_por_serie}
-        </p>
-        <p>
-          <strong>Peso utilizado:</strong> {infoEntrenamiento.peso_utilizado} kg
-        </p>
-        <p>
-          <strong>Peso total levantado:</strong> {infoEntrenamiento.peso_total_levantado} kg
-        </p>
+        <p><strong>Series:</strong> {infoEntrenamiento.series}</p>
+        <p><strong>Repeticiones:</strong> {infoEntrenamiento.repeticiones_por_serie}</p>
+        <p><strong>Peso utilizado:</strong> {infoEntrenamiento.peso_utilizado} kg</p>
+        <p><strong>Peso total levantado:</strong> {infoEntrenamiento.peso_total_levantado} kg</p>
         {infoEntrenamiento.notas && (
-          <p>
-            <strong>Notas:</strong> {infoEntrenamiento.notas}
-          </p>
+          <p><strong>Notas:</strong> {infoEntrenamiento.notas}</p>
         )}
+        <button style={{ marginTop: "1rem" }} onClick={() => setModoEdicion(true)}>
+          Editar entrenamiento
+        </button>
         <button style={{ marginTop: "1rem" }} onClick={eliminarEntrenamiento}>
-      Eliminar entrenamiento
-    </button>
+          Eliminar entrenamiento
+        </button>
       </div>
-    ) : (
-      // Mostrar mensaje y botón antes del formulario
-      fechaSeleccionada <= new Date().setHours(23, 59, 59, 999) &&
-        (!mostrarFormulario ? (
-          <div style={{ marginTop: "1rem" }}>
-            <p>No existe ningún entrenamiento para este día.</p>
-            <button onClick={() => setMostrarFormulario(true)}>
-              Añadir entrenamiento
-            </button>
-          </div>
-        ) : (
-          <FormularioEntrenamiento
-            fecha={fechaSeleccionada}
-            usuarioId={usuario?.id}
-            onEntrenamientoGuardado={(nuevoEntrenamiento) => {
-              const fecha = formatearFechaLocal(fechaSeleccionada);
+    ) : null}
 
-              // Guarda en caché el nuevo entrenamiento
-              setEntrenamientosCache(prev => ({
-                ...prev,
-                [fecha]: nuevoEntrenamiento
-              }));
+    {modoEdicion && (
+      <FormularioEntrenamiento
+        fecha={fechaSeleccionada}
+        usuarioId={usuario?.id}
+        entrenamientoPrevio={infoEntrenamiento}
+        enEdicion={true}
+        onEntrenamientoGuardado={(entrenamientoActualizado) => {
+          const fecha = formatearFechaLocal(fechaSeleccionada);
+          setEntrenamientosCache(prev => ({
+            ...prev,
+            [fecha]: entrenamientoActualizado
+          }));
+          setInfoEntrenamiento(entrenamientoActualizado);
+          setModoEdicion(false);
+          setMostrarFormulario(false);
+        }}
+      />
+    )}
 
-              setInfoEntrenamiento(nuevoEntrenamiento); // actualiza lo que se muestra
-              setMostrarFormulario(false); // oculta el formulario
-            }}
-          />
-
-          
-        ))
+    {!infoEntrenamiento && !modoEdicion && fechaSeleccionada <= new Date().setHours(23, 59, 59, 999) && (
+      !mostrarFormulario ? (
+        <div style={{ marginTop: "1rem" }}>
+          <p>No existe ningún entrenamiento para este día.</p>
+          <button onClick={() => setMostrarFormulario(true)}>
+            Añadir entrenamiento
+          </button>
+        </div>
+      ) : (
+        <FormularioEntrenamiento
+          fecha={fechaSeleccionada}
+          usuarioId={usuario?.id}
+          onEntrenamientoGuardado={(nuevoEntrenamiento) => {
+            const fecha = formatearFechaLocal(fechaSeleccionada);
+            setEntrenamientosCache(prev => ({
+              ...prev,
+              [fecha]: nuevoEntrenamiento
+            }));
+            setInfoEntrenamiento(nuevoEntrenamiento);
+            setMostrarFormulario(false);
+          }}
+        />
+      )
     )}
   </div>
 );
+
 }
