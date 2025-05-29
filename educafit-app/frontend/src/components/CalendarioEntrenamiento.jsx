@@ -147,15 +147,14 @@ function renderEmoji({ date, view }) {
     if (date > hoy) return null;
 
     return fechasConEntrenamiento.includes(fechaLocal) ? (
-        <div style={{ textAlign: "center", fontSize: "1rem" }}>🏋️‍♀️</div>
+        <div style={{ textAlign: "center", fontSize: "1.2rem" }}>🏋️‍♀️</div>
     ) : (
-        <div style={{ textAlign: "center", fontSize: "1rem" }}>🔴</div>
+        <div style={{ textAlign: "center", fontSize: "1.2rem" }}>🔴</div>
     );
 }
 
 return (
   <div className="calendario-contenedor">
-    <h2>Calendario de Entrenamientos</h2>
     <Calendar
       onChange={(nuevaFecha) => {
     setFechaSeleccionada(nuevaFecha);
@@ -215,7 +214,7 @@ return (
       />
     )}
 
-    { /* Si no hay información de entrenamiento y no estamos en modo edición, mostramos el formulario para añadir un nuevo entrenamiento */}
+    { /** Si no hay información de entrenamiento y no estamos en modo edición, mostramos el formulario para añadir un nuevo entrenamiento */}
     {!infoEntrenamiento && !modoEdicion && fechaSeleccionada <= new Date().setHours(23, 59, 59, 999) && (
       !mostrarFormulario ? (
         <div>
