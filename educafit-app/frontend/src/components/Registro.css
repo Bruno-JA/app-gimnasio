@@ -66,3 +66,29 @@
   color: #991b1b;
   border: 1px solid #ef4444;
 }
+
+.cambio-formulario {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.cambio-formulario span {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.cambio-formulario button {
+  background-color: transparent;
+  color: #2563eb;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.cambio-formulario button:hover {
+  color: #1d4ed8;
+}
