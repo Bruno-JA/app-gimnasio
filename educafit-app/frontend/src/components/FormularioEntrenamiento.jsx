@@ -1,66 +1,72 @@
 import { useState } from "react";
 import { formatearFechaLocal } from '../helpers/fechas'; //
 
-export default function FormularioEntrenamiento({ fecha, usuarioId, onEntrenamientoGuardado }) {
-  const [series, setSeries] = useState('');
-  const [repeticiones, setRepeticiones] = useState('');
-  const [peso, setPeso] = useState('');
-  const [notas, setNotas] = useState('');
+export default function FormularioEntrenamiento({ 
+  fecha, 
+  usuarioId, 
+  onEntrenamientoGuardado, 
+  entrenamientoPrevio = null, 
+  enEdicion = false 
+}) {
+  const [series, setSeries] = useState(entrenamientoPrevio?.series || '');
+  const [repeticiones, setRepeticiones] = useState(entrenamientoPrevio?.repeticiones_por_serie || '');
+  const [peso, setPeso] = useState(entrenamientoPrevio?.peso_utilizado || '');
+  const [notas, setNotas] = useState(entrenamientoPrevio?.notas || '');
   const [mensaje, setMensaje] = useState('');
 
+
 const manejarEnvio = async (e) => {
-    e.preventDefault();
-    setMensaje('');
+  e.preventDefault();
+  setMensaje('');
 
-    const fechaNormalizada = formatearFechaLocal(new Date(fecha));
+  const fechaNormalizada = formatearFechaLocal(new Date(fecha));
+  const url = enEdicion
+    ? "http://localhost/app-gimnasio/educafit-app/backend/actualizarEntrenamiento.php"
+    : "http://localhost/app-gimnasio/educafit-app/backend/guardarEntrenamiento.php";
 
-    const res = await fetch(
-        "http://localhost/app-gimnasio/educafit-app/backend/guardarEntrenamiento.php",
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      usuario_id: usuarioId,
+      fecha: fechaNormalizada,
+      series,
+      repeticiones_por_serie: repeticiones,
+      peso_utilizado: peso,
+      notas,
+    }),
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    setMensaje(enEdicion ? "Entrenamiento actualizado correctamente." : "Entrenamiento guardado correctamente.");
+
+    setTimeout(async () => {
+      const consulta = await fetch(
+        "http://localhost/app-gimnasio/educafit-app/backend/entrenamientoPorFecha.php",
         {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                usuario_id: usuarioId,
-                fecha: fechaNormalizada,
-                series,
-                repeticiones_por_serie: repeticiones,
-                peso_utilizado: peso,
-                notas,
-            }),
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            usuario_id: usuarioId,
+            fecha: fechaNormalizada,
+          }),
         }
-    );
+      );
 
-    const data = await res.json();
+      const respuesta = await consulta.json();
+      const entrenamientoActualizado = respuesta.success ? respuesta.entrenamiento : null;
 
-    if (data.success) {
-        setMensaje("Entrenamiento guardado correctamente.");
-
-        setTimeout(async () => {
-            // Solicita el entrenamiento recién añadido
-            const consulta = await fetch(
-                "http://localhost/app-gimnasio/educafit-app/backend/entrenamientoPorFecha.php",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        usuario_id: usuarioId,
-                        fecha: fechaNormalizada,
-                    }),
-                }
-            );
-
-            const respuesta = await consulta.json();
-            const nuevoEntrenamiento = respuesta.success
-                ? respuesta.entrenamiento
-                : null;
-
-            if (onEntrenamientoGuardado)
-                onEntrenamientoGuardado(nuevoEntrenamiento); // pasa la info actualizada
-        }, 2000);
-    } else {
-        setMensaje("Error al guardar el entrenamiento.");
-    }
+      if (onEntrenamientoGuardado) {
+        onEntrenamientoGuardado(entrenamientoActualizado);
+      }
+    }, 2000);
+  } else {
+    setMensaje("Error al guardar el entrenamiento.");
+  }
 };
+
 
   return (
     <form onSubmit={manejarEnvio} className="formulario-entrenamiento">
