@@ -1,49 +1,76 @@
-.calendario-contenedor {
-  max-width: 70vw;
-  margin: 2rem auto;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.react-calendar,
+.react-calendar * {
+  box-sizing: border-box;
 }
 
-/* Aumenta el tamaño del calendario */
-.react-calendar {
-  width: 100% !important;
-  max-width: 100% !important;
-  font-size: 1.3rem; /* Tamaño general del texto */
+
+/* Contenedor de los días del mes */
+.react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas como un calendario normal */
+  gap: 10px; /* separación entre días */
+  align-items: center;
 }
 
-/* Ajusta el alto de cada celda del calendario */
+/* Cada celda del calendario */
 .react-calendar__tile {
-  height: 80px !important;  /* Ajusta el alto de cada día */
-  padding: 0.5rem !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  flex-direction: column;
+  aspect-ratio: 1; /* Mantiene la proporción cuadrada */
+  border-radius: 50%;
+  overflow: hidden;
+  text-align: center;
+  font-size: 1rem;
+  background-color: white;
+  transition: background-color 0.2s ease;
+  min-height: 60px;
+  max-width: 60px;
 }
 
-/* Días seleccionados */
+.react-calendar__month-view__days__day {
+  width: 100%; /* Fuerza a que cada día llene el hueco disponible */
+}
+
+/* Día activo */
 .react-calendar__tile--active {
-  background: #2196f3;
+  background-color: #007bff;
   color: white;
-  border-radius: 10px;
+  font-weight: bold;
 }
 
-/* Día de hoy */
-.react-calendar__tile--now {
-  background: #e0f7fa;
-  border-radius: 10px;
-}
-
-/* Vista de mes */
-.react-calendar__month-view__days {
-  gap: 6px;
-}
-
-/* Quita borde feo */
-.react-calendar__tile:enabled:hover {
-  background: #f0f0f0;
+/* Hover sobre un día */
+.react-calendar__tile:hover {
+  background-color: #f0f0f0;
   cursor: pointer;
+}
+
+/* Días fuera del mes actual (opcional: más apagados) */
+.react-calendar__month-view__days__day--neighboringMonth {
+  opacity: 0.5;
+}
+
+/* Contenedor general del calendario */
+.calendario-contenedor {
+  max-width: 800px; /* Aumenta este valor si lo deseas aún más ancho */
+  margin: 0 auto;
+}
+
+/* Ajusta el ancho del componente Calendar */
+.react-calendar {
+  width: 100% !important;
+  max-width: 100%;
+  font-family: Arial, sans-serif;
+  border: none;
+  border-radius: 20px;
+}
+
+.react-calendar__month-view__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
 }
