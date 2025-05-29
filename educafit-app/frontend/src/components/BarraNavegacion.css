@@ -1,0 +1,38 @@
+.barra-navegacion {
+    border-radius: 16px;
+  display: flex;
+  position: sticky;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #24292e;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.barra-navegacion .logo {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.barra-navegacion nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.barra-navegacion button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  transition: background 0.2s ease-in-out;
+}
+
+.barra-navegacion button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
