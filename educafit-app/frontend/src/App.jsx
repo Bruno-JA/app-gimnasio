@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import Registro from "./components/Registro";
 import BarraNavegacion from "./components/BarraNavegacion";
-import "./main.css"; // Asegúrate de importar tu CSS global
 import CalendarioEntrenamiento from "./components/CalendarioEntrenamiento";
+import Educafit from "./components/Educafit";
+import Herramientas from "./components/Herramientas";
+import Usuario from "./components/Usuario";
+import "./main.css";
 
 function App() {
   const [usuarioAutenticado, setUsuarioAutenticado] = useState(null);
   const [mostrarRegistro, setMostrarRegistro] = useState(false);
+  const [vistaActual, setVistaActual] = useState("inicio");
 
   useEffect(() => {
     const datosGuardados = localStorage.getItem("usuario");
@@ -29,9 +33,7 @@ function App() {
             <Registro />
             <div className="cambio-formulario">
               <span>¿Ya tienes cuenta?</span>
-              <button onClick={() => setMostrarRegistro(false)}>
-                Iniciar sesión
-              </button>
+              <button onClick={() => setMostrarRegistro(false)}>Iniciar sesión</button>
             </div>
           </>
         ) : (
@@ -39,9 +41,7 @@ function App() {
             <Login alIniciarSesion={setUsuarioAutenticado} />
             <div className="cambio-formulario">
               <span>¿No tienes cuenta?</span>
-              <button onClick={() => setMostrarRegistro(true)}>
-                Registrarse
-              </button>
+              <button onClick={() => setMostrarRegistro(true)}>Registrarse</button>
             </div>
           </>
         )}
@@ -49,13 +49,28 @@ function App() {
     );
   }
 
+  const renderizarContenido = () => {
+    switch (vistaActual) {
+      case "inicio":
+        return <CalendarioEntrenamiento />;
+      case "educafit":
+        return <Educafit />;
+      case "herramientas":
+        return <Herramientas />;
+      case "usuario":
+        return <Usuario cerrarSesion={cerrarSesion} usuario={usuarioAutenticado} />;
+      default:
+        return <p>Vista no válida</p>;
+    }
+  };
+
   return (
     <>
-      <BarraNavegacion usuario={usuarioAutenticado} cerrarSesion={cerrarSesion} />
+      <BarraNavegacion setVista={setVistaActual} />
       <div className="contenedor-pagina">
-        <CalendarioEntrenamiento />
-      </div> 
-      </>
+        {renderizarContenido()}
+      </div>
+    </>
   );
 }
 
