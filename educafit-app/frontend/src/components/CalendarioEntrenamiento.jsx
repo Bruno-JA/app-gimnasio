@@ -219,6 +219,13 @@ return (
           usuarioId={usuario?.id}
           onEntrenamientoGuardado={(nuevoEntrenamiento) => {
             const fecha = formatearFechaLocal(fechaSeleccionada);
+
+            // Actualizar la caché con el nuevo entrenamiento añadido
+            setFechasConEntrenamiento(prev => {
+              const fechaFormateada = formatearFechaLocal(fechaSeleccionada);
+              return prev.includes(fechaFormateada) ? prev : [...prev, fechaFormateada];
+            });
+
             setEntrenamientosCache(prev => ({
               ...prev,
               [fecha]: nuevoEntrenamiento
