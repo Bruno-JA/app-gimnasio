@@ -1,12 +1,49 @@
 .calendario-contenedor {
-  text-align: center;
+  max-width: 70vw;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Aumenta el tamaño del calendario */
 .react-calendar {
-  max-width: 100%;
-  background-color: white;
+  width: 100% !important;
+  max-width: 100% !important;
+  font-size: 1.3rem; /* Tamaño general del texto */
+}
+
+/* Ajusta el alto de cada celda del calendario */
+.react-calendar__tile {
+  height: 80px !important;  /* Ajusta el alto de cada día */
+  padding: 0.5rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* Días seleccionados */
+.react-calendar__tile--active {
+  background: #2196f3;
+  color: white;
   border-radius: 10px;
-  padding: 1rem;
-  margin: 0 auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Día de hoy */
+.react-calendar__tile--now {
+  background: #e0f7fa;
+  border-radius: 10px;
+}
+
+/* Vista de mes */
+.react-calendar__month-view__days {
+  gap: 6px;
+}
+
+/* Quita borde feo */
+.react-calendar__tile:enabled:hover {
+  background: #f0f0f0;
+  cursor: pointer;
 }

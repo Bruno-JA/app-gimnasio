@@ -157,7 +157,12 @@ return (
   <div className="calendario-contenedor">
     <h2>Calendario de Entrenamientos</h2>
     <Calendar
-      onChange={setFechaSeleccionada}
+      onChange={(nuevaFecha) => {
+    setFechaSeleccionada(nuevaFecha);
+    setMostrarFormulario(false);
+    setModoEdicion(false); 
+    // Oculta el formulario si se selecciona otra fecha tanto al añadir como modificar el entrenamiento
+  }}
       value={fechaSeleccionada}
       locale="es-ES"
       tileContent={renderEmoji}
@@ -167,7 +172,8 @@ return (
       Día seleccionado: {fechaSeleccionada.toLocaleDateString()}
     </p>
 
-    {infoEntrenamiento && !modoEdicion ? (
+    {infoEntrenamiento && !modoEdicion ? ( 
+      // Mostrar información del entrenamiento si existe y comprobar que no estamos en modo edición
       <div className="info-entrenamiento">
         <h3>Entrenamiento del {fechaSeleccionada.toLocaleDateString()}</h3>
         <p><strong>Series:</strong> {infoEntrenamiento.series}</p>
@@ -177,16 +183,17 @@ return (
         {infoEntrenamiento.notas && (
           <p><strong>Notas:</strong> {infoEntrenamiento.notas}</p>
         )}
-        <button style={{ marginTop: "1rem" }} onClick={() => setModoEdicion(true)}>
+        <button onClick={() => setModoEdicion(true)}>
+          {/* se habilita el modo edición al pulsar este botón */}
           Editar entrenamiento
         </button>
-        <button style={{ marginTop: "1rem" }} onClick={eliminarEntrenamiento}>
+        <button onClick={eliminarEntrenamiento}>
           Eliminar entrenamiento
         </button>
       </div>
     ) : null}
 
-    {modoEdicion && (
+    {modoEdicion && ( // Si estamos en modo edición, mostramos el formulario de entrenamiento
       <FormularioEntrenamiento
         fecha={fechaSeleccionada}
         usuarioId={usuario?.id}
@@ -202,12 +209,16 @@ return (
           setModoEdicion(false);
           setMostrarFormulario(false);
         }}
+        onCancelar={() => {
+          setModoEdicion(false);
+        }}
       />
     )}
 
+    { /* Si no hay información de entrenamiento y no estamos en modo edición, mostramos el formulario para añadir un nuevo entrenamiento */}
     {!infoEntrenamiento && !modoEdicion && fechaSeleccionada <= new Date().setHours(23, 59, 59, 999) && (
       !mostrarFormulario ? (
-        <div style={{ marginTop: "1rem" }}>
+        <div>
           <p>No existe ningún entrenamiento para este día.</p>
           <button onClick={() => setMostrarFormulario(true)}>
             Añadir entrenamiento
@@ -233,6 +244,7 @@ return (
             setInfoEntrenamiento(nuevoEntrenamiento);
             setMostrarFormulario(false);
           }}
+          onCancelar={() => setMostrarFormulario(false)}
         />
       )
     )}

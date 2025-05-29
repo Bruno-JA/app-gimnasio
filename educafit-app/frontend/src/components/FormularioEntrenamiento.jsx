@@ -5,7 +5,9 @@ export default function FormularioEntrenamiento({
   fecha, 
   usuarioId, 
   onEntrenamientoGuardado, 
-  entrenamientoPrevio = null, 
+  entrenamientoPrevio = null,
+  entrenamientoExistente = false,
+  onCancelar = () => {},
   enEdicion = false 
 }) {
   const [series, setSeries] = useState(entrenamientoPrevio?.series || '');
@@ -70,7 +72,8 @@ const manejarEnvio = async (e) => {
 
   return (
     <form onSubmit={manejarEnvio} className="formulario-entrenamiento">
-      <h3>Registrar entrenamiento del {new Date(fecha).toLocaleDateString()}</h3>
+      <h3>{entrenamientoExistente ? 'Editar' : 'Registrar'} entrenamiento del {new Date(fecha).toLocaleDateString()}</h3>
+
       <input
         type="number"
         placeholder="Series"
@@ -98,7 +101,12 @@ const manejarEnvio = async (e) => {
         value={notas}
         onChange={(e) => setNotas(e.target.value)}
       />
-      <button type="submit">Guardar entrenamiento</button>
+
+      <button type="submit">{entrenamientoExistente ? 'Guardar cambios' : 'Guardar entrenamiento'}</button>
+      <button type="button" onClick={onCancelar} style={{ marginLeft: '1rem' }}>
+        Cancelar
+      </button>
+      {/* botón para cancelar la edición o registro del entrenamiento */}
       {mensaje && <p>{mensaje}</p>}
     </form>
   );
