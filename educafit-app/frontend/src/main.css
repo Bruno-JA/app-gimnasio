@@ -3,13 +3,17 @@ html, body {
   padding: 0;
   height: 100vh;
   width: 100vw;
+  /* centrar el contenedor contenedor-principal */
+  display: flex;
+  justify-content: center;
   overflow: hidden; 
-  background-color: #423F3C;
+  background-color: #332F2B;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .contenedor-principal { /* Contenedor principal que ocupa toda la pantalla y encapsula todo el contenido de la web */
   width: calc(100vw - 4rem);
+  max-width: 1600px;
   height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
@@ -29,5 +33,5 @@ html, body {
   flex: 1;
   overflow-y: auto;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: #423F3C;
 }
