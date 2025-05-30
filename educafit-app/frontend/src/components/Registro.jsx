@@ -34,12 +34,35 @@ export default function Registro() {
     <div className="form-registro">
       <h2>Registro</h2>
       <form onSubmit={registrarUsuario}>
-        <input type="text" name="nombre_usuario" placeholder="Usuario" value={datosFormulario.nombre_usuario} onChange={handleChange} required />
-        <input type="text" name="nombre" placeholder="Tu nombre" value={datosFormulario.nombre} onChange={handleChange} required />
-        <input type="password" name="contraseña" placeholder="Contraseña" value={datosFormulario.contraseña} onChange={handleChange} required />
+        <input
+          type="text"
+          name="nombre_usuario"
+          placeholder="Usuario"
+          value={datosFormulario.nombre_usuario}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Tu nombre"
+          value={datosFormulario.nombre}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="contraseña"
+          placeholder="Contraseña"
+          value={datosFormulario.contraseña}
+          onChange={handleChange}
+          required
+        />
         <button type="submit">Registrarse</button>
       </form>
-      {mensaje && <p className={`mensaje ${tipoMensaje}`}>{mensaje}</p>}
+      {mensaje && (
+        <p className={`mensaje ${tipoMensaje}`}>{mensaje}</p>
+      )}
     </div>
   );
 }

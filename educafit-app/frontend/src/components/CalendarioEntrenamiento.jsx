@@ -175,12 +175,22 @@ return (
       // Mostrar información del entrenamiento si existe y comprobar que no estamos en modo edición
       <div className="info-entrenamiento">
         <h3>Entrenamiento del {fechaSeleccionada.toLocaleDateString()}</h3>
-        <p><strong>Series:</strong> {infoEntrenamiento.series}</p>
-        <p><strong>Repeticiones:</strong> {infoEntrenamiento.repeticiones_por_serie}</p>
-        <p><strong>Peso utilizado:</strong> {infoEntrenamiento.peso_utilizado} kg</p>
-        <p><strong>Peso total levantado:</strong> {infoEntrenamiento.peso_total_levantado} kg</p>
+        <p>
+          <strong>Series:</strong> {infoEntrenamiento.series}
+        </p>
+        <p>
+          <strong>Repeticiones:</strong> {infoEntrenamiento.repeticiones_por_serie}
+        </p>
+        <p>
+          <strong>Peso utilizado:</strong> {infoEntrenamiento.peso_utilizado} kg
+        </p>
+        <p>
+          <strong>Peso total levantado:</strong> {infoEntrenamiento.peso_total_levantado} kg
+        </p>
         {infoEntrenamiento.notas && (
-          <p><strong>Notas:</strong> {infoEntrenamiento.notas}</p>
+          <p>
+        <strong>Notas:</strong> {infoEntrenamiento.notas}
+          </p>
         )}
         <button onClick={() => setModoEdicion(true)}>
           {/* se habilita el modo edición al pulsar este botón */}
