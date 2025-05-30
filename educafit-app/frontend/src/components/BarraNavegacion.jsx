@@ -50,39 +50,49 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
           }}
         ></div>
         <button
-  data-vista="inicio"
-  className={vistaActiva === "inicio" ? "activo" : ""}
-  onClick={() => actualizarSelector("inicio")}
->
-  Inicio
-</button>
-
-<button
-  data-vista="educafit"
-  className={vistaActiva === "educafit" ? "activo" : ""}
-  onClick={() => actualizarSelector("educafit")}
->
-  Educafit
-</button>
-
-<button
-  data-vista="herramientas"
-  className={vistaActiva === "herramientas" ? "activo" : ""}
-  onClick={() => actualizarSelector("herramientas")}
->
-  Herramientas
-</button>
-        <div className="usuario-menu" ref={menuRef}>
-          <button onClick={() => setMostrarMenuUsuario(prev => !prev)}>
+          data-vista="inicio"
+          className={vistaActiva === "inicio" ? "activo" : ""}
+          onClick={() => actualizarSelector("inicio")}
+        >
+          Inicio
+        </button>
+        <button
+          data-vista="educafit"
+          className={vistaActiva === "educafit" ? "activo" : ""}
+          onClick={() => actualizarSelector("educafit")}
+        >
+          Educafit
+        </button>
+        <button
+          data-vista="herramientas"
+          className={vistaActiva === "herramientas" ? "activo" : ""}
+          onClick={() => actualizarSelector("herramientas")}
+        >
+          Herramientas
+        </button>
+        <div
+          className={`usuario-menu ${mostrarMenuUsuario ? "activo" : ""}`}
+          ref={menuRef}
+        >
+          <button
+            onClick={() => setMostrarMenuUsuario((prev) => !prev)}
+            className={mostrarMenuUsuario ? "boton-usuario-activo" : ""}
+          >
             Usuario
           </button>
-          {mostrarMenuUsuario && (
-            <div className="menu-desplegable">
-              <button onClick={() => actualizarSelector('perfil')}>Perfil de usuario</button>
-              <button onClick={() => actualizarSelector('ajustes')}>Ajustes</button>
-              <button onClick={cerrarSesion}>Cerrar sesión</button>
-            </div>
-          )}
+          <div
+            className={`menu-desplegable ${
+              mostrarMenuUsuario ? "visible" : ""
+            }`}
+          >
+            <button onClick={() => actualizarSelector("perfil")}>
+              Perfil de usuario
+            </button>
+            <button onClick={() => actualizarSelector("ajustes")}>
+              Ajustes
+            </button>
+            <button onClick={cerrarSesion}>Cerrar sesión</button>
+          </div>
         </div>
       </nav>
     </div>
