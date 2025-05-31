@@ -3,7 +3,7 @@ import Calendar from 'react-calendar'; // componente de calendario
 import 'react-calendar/dist/Calendar.css';
 import './CalendarioEntrenamiento.css';
 import FormularioEntrenamiento from './FormularioEntrenamiento';
-import { formatearFechaLocal } from '../helpers/fechas'; // Importa la función para formatear fechas
+import { formatearFechaLocal } from '../helpers/fechas'; // Importa la función para formatear fechas a YYYY-MM-DD y poder sacarlo del backend
 
 
 export default function CalendarioEntrenamiento() {
@@ -23,13 +23,10 @@ useEffect(() => {
 
   const año = fechaSeleccionada.getFullYear();
   const mes = fechaSeleccionada.getMonth();
-
   const claveMes = `${año}-${mes}`; // Clave única para el mes (año-mes)
 
   // Evita repetir la petición si ya consultamos este mes
   if (mesConsultado === claveMes) return;
-
-  console.log(año, mes);
 
   const primerDiaDelMes = new Date(año, mes, 1);
   const ultimoDiaDelMes = new Date(año, mes + 1, 0);
@@ -55,23 +52,17 @@ useEffect(() => {
     });
 }, [fechaSeleccionada, usuario, mesConsultado]);
 
-// Efecto para obtener la información del entrenamiento al seleccionar una fecha
+// Efecto para obtener la información del entrenamiento al seleccionar un día
 useEffect(() => {
-  // Si no hay usuario logueado, no hacemos nada
   if (!usuario) return;
 
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
 
-  if (fechaSeleccionada > hoy) {
-    setInfoEntrenamiento(null);
-    return;
-  }
-
   const fecha = formatearFechaLocal(fechaSeleccionada);
 
   // Si ya está en la caché, usamos lo que tenemos
-  if (entrenamientosCache[fecha]) {
+  if (fecha in entrenamientosCache) {
     setInfoEntrenamiento(entrenamientosCache[fecha]);
     return;
   }
@@ -89,10 +80,9 @@ useEffect(() => {
     .then(data => {
       const info = data.success ? data.entrenamiento : null;
 
-      // Actualiza estado con la nueva info
       setInfoEntrenamiento(info);
 
-      // Almacena en caché
+      // Guardar en caché aunque sea un día sin entreno para evitar peticiones en bucle al backend
       setEntrenamientosCache(prev => ({
         ...prev,
         [fecha]: info
@@ -169,20 +159,20 @@ return (
     const claveNuevoMes = `${nuevoAnio}-${nuevoMes}`;
     if (claveNuevoMes !== mesConsultado) {
       setMesConsultado(null); // Fuerza al useEffect a volver a consultar el nuevo mes
-      setFechaSeleccionada(activeStartDate); // Actualiza la fecha para que el efecto de carga se dispare
+      setFechaSeleccionada(activeStartDate); // Actualiza la fecha para que se ejecute el useEffect
     }
   }}
       value={fechaSeleccionada}
       locale="es-ES"
       tileContent={renderEmoji}
-      maxDate={new Date()} // No permitir seleccionar fechas futuras
+      maxDate={new Date()} // No permitir seleccionar fechas futuras (por ahora no se puede viajar al futuro)
     />
     <p style={{ marginTop: "1rem" }}>
       Día seleccionado: {fechaSeleccionada.toLocaleDateString()}
     </p>
 
     {infoEntrenamiento && !modoEdicion ? ( 
-      // Mostrar información del entrenamiento si existe y comprobar que no estamos en modo edición
+      // Mostrar información del entrenamiento si existe y comprobar que no estamos en modo edición.
       <div className="info-entrenamiento">
         <h3>Entrenamiento del {fechaSeleccionada.toLocaleDateString()}</h3>
         <p>
@@ -212,7 +202,7 @@ return (
       </div>
     ) : null}
 
-    {modoEdicion && ( // Si estamos en modo edición, mostramos el formulario de entrenamiento
+    {modoEdicion && ( // Si estamos en modo edición, mostramos el formulario de entrenamiento y mostramos la información del entrenamiento previo
       <FormularioEntrenamiento
         fecha={fechaSeleccionada}
         usuarioId={usuario?.id}
