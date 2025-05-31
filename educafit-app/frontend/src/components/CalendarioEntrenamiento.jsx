@@ -8,14 +8,13 @@ import { formatearFechaLocal } from '../helpers/fechas'; // Importa la función 
 
 export default function CalendarioEntrenamiento() {
 
-  const [entrenamientosCache, setEntrenamientosCache] = useState({});
-  // Estado para almacenar la fecha seleccionada y las fechas con entrenamiento, evitando llamar al backend en bucle
+  const [entrenamientosCache, setEntrenamientosCache] = useState({}); // Estado para almacenar la fecha seleccionada y las fechas con entrenamiento, evitando llamar al backend en bucle
   const [fechaSeleccionada, setFechaSeleccionada] = useState(new Date()); // Fecha actual como valor inicial
   const [fechasConEntrenamiento, setFechasConEntrenamiento] = useState([]); // Array para almacenar las fechas con entrenamiento
   const [mostrarFormulario, setMostrarFormulario] = useState(false); // Estado para mostrar u ocultar el formulario de entrenamiento
   const [mesConsultado, setMesConsultado] = useState(null); // Estado para almacenar el mes consultado
   const [modoEdicion, setModoEdicion] = useState(false);
-
+  const [infoEntrenamiento, setInfoEntrenamiento] = useState(null); // Información del entrenamiento para la fecha seleccionada
   const usuario = JSON.parse(localStorage.getItem("usuario")); // obtener ID del usuario logueado
 
   // Efecto para obtener las fechas con entrenamiento del mes seleccionado
@@ -24,10 +23,13 @@ useEffect(() => {
 
   const año = fechaSeleccionada.getFullYear();
   const mes = fechaSeleccionada.getMonth();
+
   const claveMes = `${año}-${mes}`; // Clave única para el mes (año-mes)
 
   // Evita repetir la petición si ya consultamos este mes
   if (mesConsultado === claveMes) return;
+
+  console.log(año, mes);
 
   const primerDiaDelMes = new Date(año, mes, 1);
   const ultimoDiaDelMes = new Date(año, mes + 1, 0);
@@ -51,13 +53,11 @@ useEffect(() => {
         setMesConsultado(claveMes); // Marcamos que ya hemos consultado este mes para evitar repetir la petición
       }
     });
-}, [fechaSeleccionada, usuario]);
+}, [fechaSeleccionada, usuario, mesConsultado]);
 
-  
-  const [infoEntrenamiento, setInfoEntrenamiento] = useState(null);
-
-
+// Efecto para obtener la información del entrenamiento al seleccionar una fecha
 useEffect(() => {
+  // Si no hay usuario logueado, no hacemos nada
   if (!usuario) return;
 
   const hoy = new Date();
@@ -98,7 +98,7 @@ useEffect(() => {
         [fecha]: info
       }));
     });
-}, [fechaSeleccionada]);
+}, [fechaSeleccionada, usuario, entrenamientosCache]);
 
 const eliminarEntrenamiento = async () => {
   const fecha = formatearFechaLocal(fechaSeleccionada);
@@ -161,6 +161,16 @@ return (
     setMostrarFormulario(false);
     setModoEdicion(false); 
     // Oculta el formulario si se selecciona otra fecha tanto al añadir como modificar el entrenamiento
+  }}
+  onActiveStartDateChange={({ activeStartDate }) => {
+    // Permite actualizar el mes consultado al cambiar de mes dentro del calendario
+    const nuevoMes = activeStartDate.getMonth();
+    const nuevoAnio = activeStartDate.getFullYear();
+    const claveNuevoMes = `${nuevoAnio}-${nuevoMes}`;
+    if (claveNuevoMes !== mesConsultado) {
+      setMesConsultado(null); // Fuerza al useEffect a volver a consultar el nuevo mes
+      setFechaSeleccionada(activeStartDate); // Actualiza la fecha para que el efecto de carga se dispare
+    }
   }}
       value={fechaSeleccionada}
       locale="es-ES"
