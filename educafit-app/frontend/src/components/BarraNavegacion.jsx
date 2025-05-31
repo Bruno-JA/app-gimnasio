@@ -19,11 +19,17 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
     return () => document.removeEventListener('mousedown', manejarClickFuera);
   }, []);
 
-  const actualizarSelector = (nombreVista) => {
+  const posicionarSelector = (nombreVista) => {
+    const botones = navRef.current.querySelectorAll('button');
+    const boton = Array.from(botones).find(btn => btn.dataset.vista === nombreVista);
+    if (boton) {
+      setPosicionSelector({ left: boton.offsetLeft, width: boton.offsetWidth });
+    }
+  };
 
+  const actualizarSelector = (nombreVista) => {
     const vistasSinSelector = ["perfil", "ajustes"];
     // Array escalable de vistas que no deben mostrar el selector
-
     setVista(nombreVista);
     setVistaActiva(nombreVista);
     setMostrarMenuUsuario(false); // Cerrar el menú al cambiar de vista
@@ -40,14 +46,13 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
     }
   };
 
+  // Inicializar el selector en la vista activa al cargar el componente
   useEffect(() => {
-    // Inicializar el selector en la vista "inicio"
-    actualizarSelector(vistaActiva);
-    const handleResize = () => actualizarSelector(vistaActiva);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-    // eslint-disable-next-line
-  }, []);
+    posicionarSelector(vistaActiva);
+    const ajustarSelectorAlRedimensionar = () => posicionarSelector(vistaActiva);
+    window.addEventListener('resize', ajustarSelectorAlRedimensionar);
+    return () => window.removeEventListener('resize', ajustarSelectorAlRedimensionar);
+  }, [vistaActiva]);
 
   return (
     <div className="barra-navegacion">
