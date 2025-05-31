@@ -20,6 +20,10 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
   }, []);
 
   const actualizarSelector = (nombreVista) => {
+
+    const vistasSinSelector = ["perfil", "ajustes"];
+    // Array escalable de vistas que no deben mostrar el selector
+
     setVista(nombreVista);
     setVistaActiva(nombreVista);
     setMostrarMenuUsuario(false); // Cerrar el menú al cambiar de vista
@@ -30,17 +34,19 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
       setPosicionSelector({ left: boton.offsetLeft, width: boton.offsetWidth });
     }
 
-    if (nombreVista === "perfil" || nombreVista === "ajustes") {
-      // Ocultar el fondo animado de los botones al hacer clic en "Perfil de usuario" o "Ajustes" dentro del menú desplegable
+    if (vistasSinSelector.includes(nombreVista)) {
+      // Ocultar el fondo animado de los botones al hacer clic en un botón dentro del menú desplegable.
       setPosicionSelector({ left: 0, width: 0 });
     }
   };
 
-  useEffect(() => { // Inicializar el selector en la vista "inicio"
+  useEffect(() => {
+    // Inicializar el selector en la vista "inicio"
     actualizarSelector(vistaActiva);
     const handleResize = () => actualizarSelector(vistaActiva);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -86,9 +92,7 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
             Usuario
           </button>
           <div
-            className={`menu-desplegable ${
-              mostrarMenuUsuario ? "visible" : ""
-            }`}
+            className={`menu-desplegable ${mostrarMenuUsuario ? "visible" : ""}`}
           >
             <button onClick={() => actualizarSelector("perfil")}>
               Perfil de usuario
