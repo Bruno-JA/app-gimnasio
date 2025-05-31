@@ -1,4 +1,9 @@
-
+/* Contenedor general del calendario */
+.calendario-contenedor {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
 
 /* Contenedor de los días del mes */
 .react-calendar__month-view__days {
@@ -42,12 +47,6 @@
 /* Días fuera del mes actual */
 .react-calendar__month-view__days__day--neighboringMonth {
   opacity: 0.5;
-}
-
-/* Contenedor general del calendario */
-.calendario-contenedor {
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 /* Ajusta el ancho del componente Calendar */
