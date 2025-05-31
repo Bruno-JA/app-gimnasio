@@ -1,0 +1,109 @@
+.educafit-contenedor {
+    display: flex;
+  height: 100vh; /* Asegura que todo ocupe el alto de la ventana */
+  overflow: hidden; /* Evita que el contenedor general haga scroll */
+}
+
+/* Menú lateral izquierdo */
+.menu-lateral {
+  width: 280px;
+  background-color: #302E2B;
+  color: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0; /* Evita que se reduzca */
+  height: 100vh; /* Fijo al alto completo */
+  position: sticky; /* O fixed si lo prefieres fijo sobre todo */
+  top: 0; /* Para que se mantenga en la parte superior al hacer scroll */
+  overflow-y: auto;
+  z-index: 99999; /* Asegura que esté por encima del contenido principal */
+}
+
+.saludo-usuario {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #f1f5f9;
+}
+
+.lista-categorias {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lista-categorias button {
+  background: none;
+  border: none;
+  color: #f1f5f9;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.lista-categorias button:hover,
+.lista-categorias button.activa {
+  background-color: #334155; /* azul más suave */
+}
+
+/* Ventana de contenido principal */
+.ventana-contenido {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden; /* Evita scroll horizontal */
+  position: relative;
+}
+
+/* Barra de búsqueda fija */
+.barra-busqueda {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #423F3C;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.barra-busqueda.sombra {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+
+.input-busqueda {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+/* Contenido de ejercicios */
+.contenido-ejercicios {
+  padding: 2rem; /* Añade margen a izquierda y derecha */
+  display: grid;
+  color: #f1f5f9;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  max-width: 1200px; /* Evita que se estire demasiado en pantallas grandes */
+  margin: 0 auto; /* Centra horizontalmente */
+  box-sizing: border-box;
+}
+
+.separador-categorias {
+  border: none;
+  height: 1px;
+  background-color: #f1f5f9; /* un gris suave */
+  margin: 1rem 0;
+}
