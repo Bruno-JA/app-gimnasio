@@ -29,6 +29,11 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
     if (boton) {
       setPosicionSelector({ left: boton.offsetLeft, width: boton.offsetWidth });
     }
+
+    if (nombreVista === "perfil" || nombreVista === "ajustes") {
+      // Ocultar el fondo animado de los botones al hacer clic en "Perfil de usuario" o "Ajustes" dentro del menú desplegable
+      setPosicionSelector({ left: 0, width: 0 });
+    }
   };
 
   useEffect(() => { // Inicializar el selector en la vista "inicio"
