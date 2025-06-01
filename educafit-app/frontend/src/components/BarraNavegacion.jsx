@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './BarraNavegacion.css';
 // Iconos de react-icons para los botones de navegación
-import { FaCalendar, FaBook, FaTools, FaUser } from 'react-icons/fa';
+import { FaCalendar, FaBookOpen, FaTools, FaUser } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
 export default function BarraNavegacion({ setVista, cerrarSesion }) {
   const [vistaActiva, setVistaActiva] = useState("inicio");
@@ -83,7 +83,7 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
             className={vistaActiva === "educafit" ? "activo" : ""}
             onClick={() => actualizarSelector("educafit")}
           >
-            <FaBook className="icono-educafit" />
+            <FaBookOpen className="icono-educafit" />
           </button>
           <button
             data-vista="herramientas"
