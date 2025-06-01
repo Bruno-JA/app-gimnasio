@@ -93,6 +93,7 @@
 .contenido-ejercicios {
   padding: 2rem; /* Añade margen a izquierda y derecha */
   display: grid;
+  width: 100%;
   color: #f1f5f9;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;

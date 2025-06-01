@@ -49,6 +49,7 @@ function App() {
     );
   }
 
+  // dependiendo del valor en vistaActual, se renderiza un componente diferente represantando la pestaña actual seleccionada
   const renderizarContenido = () => {
     switch (vistaActual) {
       case "inicio":

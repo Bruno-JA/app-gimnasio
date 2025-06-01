@@ -1,4 +1,4 @@
-.barra-navegacion {
+.barra-navegacion { /* Estilos generales de la barra de navegación */
   display: flex;
   position: sticky;
   top: 0;
@@ -10,7 +10,7 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
-.barra-navegacion .logo {
+.barra-navegacion .logo { /* TODO: Añadir logo, terminar diseño en Adobe Illustrator */
   font-size: 3rem;
   font-weight: bold;
 }
