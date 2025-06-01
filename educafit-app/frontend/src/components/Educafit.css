@@ -49,12 +49,12 @@
 
 /* Ventana de contenido principal */
 .ventana-contenido {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
-  height: 100vh;
   overflow-y: auto;
   overflow-x: hidden; /* Evita scroll horizontal */
+  height: calc(100vh - 200px); /* Ajusta la altura para que la barra de búsqueda no recorte el contenido, medida aproximada */
 }
 
 /* Barra de búsqueda fija */
@@ -86,13 +86,12 @@
 
 /* Contenido de ejercicios */
 .contenido-ejercicios {
-  padding: 2rem; /* Añade margen a izquierda y derecha */
+  padding: 1rem 2rem 3rem 2rem; /* Añade margen a izquierda y derecha */
   display: grid;
   width: 100%;
   color: #f1f5f9;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
-  max-width: 1200px; /* Evita que se estire demasiado en pantallas grandes */
   margin: 0 auto; /* Centra horizontalmente */
   box-sizing: border-box;
 }
