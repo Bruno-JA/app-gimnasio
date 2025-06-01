@@ -1,5 +1,4 @@
 //TODO: Añadir una categoría de "todos" para poder buscar todos los ejercicios sin importar la categoría
-
 import React, { useState } from "react";
 import "./Educafit.css";
 import TarjetaEjercicio from "./TarjetaEjercicio";
