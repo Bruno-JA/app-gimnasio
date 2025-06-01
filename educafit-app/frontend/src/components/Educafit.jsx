@@ -1,5 +1,4 @@
-//TODO: Añadir una categoría de "todos" para poder buscar todos los ejercicios sin importar la categoría
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Educafit.css";
 import TarjetaEjercicio from "./TarjetaEjercicio";
 import DetalleEjercicio from "./DetalleEjercicio";
@@ -8,47 +7,65 @@ export default function Educafit() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("pecho");
   const [busqueda, setBusqueda] = useState("");
   const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(null);
-
+  const [ejercicios, setEjercicios] = useState([]);
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   const categorias = [
-    { id: "pecho", nombre: "Pecho" },
-    { id: "piernas", nombre: "Piernas" },
-    { id: "espalda", nombre: "Espalda" },
-    { id: "hombros", nombre: "Hombros" },
-    { id: "brazos", nombre: "Brazos" },
-    { id: "core", nombre: "Core" },
-    { id: "favoritos", nombre: "Favoritos ⭐" }
+    { id: "pecho", nombre: "Pecho", muscleId: 4 },
+    { id: "piernas", nombre: "Piernas", muscleId: 10 },
+    { id: "espalda", nombre: "Espalda", muscleId: 12 },
+    { id: "hombros", nombre: "Hombros", muscleId: 2 },
+    { id: "brazos", nombre: "Brazos", muscleId: 5 }, // Triceps como ejemplo
+    { id: "core", nombre: "Core", muscleId: 6 },
+    { id: "favoritos", nombre: "Favoritos ⭐", muscleId: null }
   ];
 
-  // Datos de ejemplo de ejercicios
-  const ejercicios = [
-    {
-      id: 1,
-      nombre: "Press de banca",
-      grupo_principal: "Pecho",
-      grupos_secundarios: ["Tríceps", "Hombros"],
-      equipamiento: "Barra",
-      instrucciones: ["Acuéstate en el banco...", "Baja la barra lentamente..."],
-      imagen: "https://via.placeholder.com/300x150.png?text=Press+Banca"
-    },
-    {
-      id: 2,
-      nombre: "Sentadillas",
-      grupo_principal: "Piernas",
-      grupos_secundarios: ["Glúteos", "Core"],
-      equipamiento: "Ninguno",
-      instrucciones: ["Ponte de pie con los pies separados...", "Baja lentamente como si te sentaras..."],
-      imagen: "https://via.placeholder.com/300x150.png?text=Sentadillas"
+  const muscleId = categorias.find(cat => cat.id === categoriaSeleccionada)?.muscleId;
+
+  useEffect(() => {
+  if (!muscleId) return; // No hacemos petición para favoritos aún
+
+  fetch(`https://wger.de/api/v2/exerciseinfo/?muscles=${muscleId}&language=4&limit=20`, {
+    headers: {
+      Authorization: "Token c361a66e93dadfed7fcaa62c018a2356cfa86bcd"
     }
-    // Agrega más según lo necesites
-  ];
+  })
+    .then(res => res.json())
+    .then(data => {
+      const ejerciciosFormateados = data.results
+        .map(ej => {
+          const traduccion = ej.translations.find(t => t.language === 4 || t.language === 2); // Español o Inglés
+          const instrucciones = traduccion?.description
+            ?.split(".")
+            .map(i => i.trim())
+            .filter(i => i.length > 0);
 
-  const ejerciciosFiltrados = ejercicios.filter(ej => // 
-    // implementación inicial para filtrar entre las categorías básicas que se muestran en el menú lateral
-    ej.grupo_principal.toLowerCase().includes(categoriaSeleccionada.toLowerCase())
-    // implementación inicial para filtrar entre los ejercicios que se muestran al buscar un ejercicio específico dentro de la categoría seleccionada.
-    && ej.nombre.toLowerCase().includes(busqueda.toLowerCase())
+          return {
+            id: ej.id,
+            nombre: traduccion?.name?.trim(),
+            imagen: ej.images[0]?.image,
+            grupo_principal: ej.category.name,
+            grupos_secundarios: ej.muscles_secondary.map(m => m.name),
+            equipamiento: ej.equipment.map(e => e.name).join(", "),
+            instrucciones
+          };
+        })
+        .filter(
+          ej =>
+            ej.nombre &&
+            ej.imagen &&
+            ej.instrucciones &&
+            ej.instrucciones.length > 0
+        ); // Solo incluir si tiene nombre, imagen e instrucciones
+
+      setEjercicios(ejerciciosFormateados);
+    });
+}, [muscleId]);
+
+
+  // Filtrar ejercicios en la categoría seleccionada
+  const ejerciciosFiltrados = ejercicios.filter(ej =>
+    ej.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
@@ -65,7 +82,7 @@ export default function Educafit() {
                 className={categoriaSeleccionada === categoria.id ? "activa" : ""}
                 onClick={() => {
                   setCategoriaSeleccionada(categoria.id);
-                  setEjercicioSeleccionado(null); // Reset al cambiar de categoría
+                  setEjercicioSeleccionado(null);
                 }}
               >
                 {categoria.nombre}
