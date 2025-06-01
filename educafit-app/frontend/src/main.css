@@ -34,3 +34,25 @@ html, body {
   overflow-y: hidden; /* Evita que el contenedor general haga scroll */
   background-color: #423F3C;
 }
+
+/* Scrollbar general */
+.ventana-contenido::-webkit-scrollbar {
+  width: 8px; /* más fina */
+}
+
+/* Track (el fondo de la scrollbar) */
+.ventana-contenido::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 10px 0; /* elimina flechas arriba y abajo dejando un hueco */
+}
+
+/* Thumb (la parte que se mueve) */
+.ventana-contenido::-webkit-scrollbar-thumb {
+  background-color: #888; /* color gris medio */
+  border-radius: 8px;      /* bordes redondeados */
+}
+
+/* Hover para el thumb */
+.ventana-contenido::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa; /* un poco más claro al pasar el ratón */
+}
