@@ -1,40 +1,56 @@
-import React, { useState, useRef, useEffect } from "react";
+//TODO: Añadir una categoría de "todos" para poder buscar todos los ejercicios sin importar la categoría
+
+import React, { useState } from "react";
 import "./Educafit.css";
-import TarjetaEjercicio from "./tarjetaEjercicio"; // tarjetas con la información de los ejercicios
+import TarjetaEjercicio from "./TarjetaEjercicio";
+import DetalleEjercicio from "./DetalleEjercicio";
 
 export default function Educafit() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("pecho");
-  const [sombraBusqueda, setSombraBusqueda] = useState(false); // Estado para la sombra de la barra de búsqueda al hacer scroll
-  const ventanaContenidoRef = useRef(null); // Referencia al contenedor principal para manejar el scroll
+  const [busqueda, setBusqueda] = useState("");
+  const [ejercicioSeleccionado, setEjercicioSeleccionado] = useState(null);
+
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   const categorias = [
-    { id: "pecho", nombre: "Entrenamientos de pecho" },
-    { id: "piernas", nombre: "Entrenamientos de piernas" },
-    { id: "espalda", nombre: "Entrenamientos de espalda" },
-    { id: "hombros", nombre: "Entrenamientos de hombros" },
-    { id: "brazos", nombre: "Entrenamientos de brazos" },
-    { id: "core", nombre: "Entrenamientos de core" },
-    { id: "favoritos", nombre: "Entrenamientos favoritos ⭐" }
+    { id: "pecho", nombre: "Pecho" },
+    { id: "piernas", nombre: "Piernas" },
+    { id: "espalda", nombre: "Espalda" },
+    { id: "hombros", nombre: "Hombros" },
+    { id: "brazos", nombre: "Brazos" },
+    { id: "core", nombre: "Core" },
+    { id: "favoritos", nombre: "Favoritos ⭐" }
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = ventanaContenidoRef.current?.scrollTop;
-      setSombraBusqueda(scrollTop > 0);
-    };
-
-    const ref = ventanaContenidoRef.current;
-    if (ref) {
-      ref.addEventListener("scroll", handleScroll);
+  // Datos de ejemplo de ejercicios
+  const ejercicios = [
+    {
+      id: 1,
+      nombre: "Press de banca",
+      grupo_principal: "Pecho",
+      grupos_secundarios: ["Tríceps", "Hombros"],
+      equipamiento: "Barra",
+      instrucciones: ["Acuéstate en el banco...", "Baja la barra lentamente..."],
+      imagen: "https://via.placeholder.com/300x150.png?text=Press+Banca"
+    },
+    {
+      id: 2,
+      nombre: "Sentadillas",
+      grupo_principal: "Piernas",
+      grupos_secundarios: ["Glúteos", "Core"],
+      equipamiento: "Ninguno",
+      instrucciones: ["Ponte de pie con los pies separados...", "Baja lentamente como si te sentaras..."],
+      imagen: "https://via.placeholder.com/300x150.png?text=Sentadillas"
     }
+    // Agrega más según lo necesites
+  ];
 
-    return () => {
-      if (ref) {
-        ref.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+  const ejerciciosFiltrados = ejercicios.filter(ej => // 
+    // implementación inicial para filtrar entre las categorías básicas que se muestran en el menú lateral
+    ej.grupo_principal.toLowerCase().includes(categoriaSeleccionada.toLowerCase())
+    // implementación inicial para filtrar entre los ejercicios que se muestran al buscar un ejercicio específico dentro de la categoría seleccionada.
+    && ej.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
 
   return (
     <div className="educafit-contenedor">
@@ -48,7 +64,10 @@ export default function Educafit() {
               {categoria.id === "favoritos" && <hr className="separador-categorias" />}
               <button
                 className={categoriaSeleccionada === categoria.id ? "activa" : ""}
-                onClick={() => setCategoriaSeleccionada(categoria.id)}
+                onClick={() => {
+                  setCategoriaSeleccionada(categoria.id);
+                  setEjercicioSeleccionado(null); // Reset al cambiar de categoría
+                }}
               >
                 {categoria.nombre}
               </button>
@@ -57,46 +76,33 @@ export default function Educafit() {
         </nav>
       </aside>
 
-      <main className="ventana-contenido" ref={ventanaContenidoRef}>
-        <div className={`barra-busqueda ${sombraBusqueda ? "sombra" : ""}`}>
+      <main className="ventana-contenido">
+        <div className="barra-busqueda">
           <input
             type="text"
             placeholder="Buscar ejercicio..."
             className="input-busqueda"
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
           />
         </div>
 
-        <div className="contenido-ejercicios">
-          {/* Aquí irán las tarjetas de los ejercicios según la categoría seleccionada */}
-          <TarjetaEjercicio
-            titulo="Press de banca"
-            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
+        {ejercicioSeleccionado ? (
+          <DetalleEjercicio
+            ejercicio={ejercicioSeleccionado}
+            onVolver={() => setEjercicioSeleccionado(null)}
           />
-          <TarjetaEjercicio
-            titulo="Press de banca"
-            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
-          />
-          <TarjetaEjercicio
-            titulo="Press de banca"
-            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
-          />
-          <TarjetaEjercicio
-            titulo="Press de banca"
-            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
-          />
-          <TarjetaEjercicio
-            titulo="Press de banca"
-            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
-          />
-          <TarjetaEjercicio
-            titulo="Press de banca"
-            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
-          />
-          <TarjetaEjercicio
-            titulo="Press de banca"
-            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
-          />
-        </div>
+        ) : (
+          <div className="contenido-ejercicios">
+            {ejerciciosFiltrados.map((ejercicio) => (
+              <TarjetaEjercicio
+                key={ejercicio.id}
+                ejercicio={ejercicio}
+                onClick={() => setEjercicioSeleccionado(ejercicio)}
+              />
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );
