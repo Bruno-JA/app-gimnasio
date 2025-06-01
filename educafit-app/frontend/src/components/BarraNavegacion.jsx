@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './BarraNavegacion.css';
 // Iconos de react-icons para los botones de navegación
 import { FaCalendar, FaBook, FaTools, FaUser } from 'react-icons/fa';
-
+import { IoIosArrowDown } from 'react-icons/io';
 export default function BarraNavegacion({ setVista, cerrarSesion }) {
   const [vistaActiva, setVistaActiva] = useState("inicio");
   const [posicionSelector, setPosicionSelector] = useState({ left: 0, width: 0 });
@@ -58,7 +58,10 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
 
   return (
     <div className="barra-navegacion">
-      <div className="logo">EducaFit</div>
+      <div className="cabecera">
+        <img src="/src/assets/logo_app_fitness.png" alt="Logo-fit" className="logo" />
+        <span>EducaFit</span>
+      </div>
       <nav ref={navRef}>
         <div
           className="selector"
@@ -98,6 +101,8 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
               className={mostrarMenuUsuario ? "boton-usuario-activo" : ""}
             >
               <FaUser className="icono-usuario" />
+              <IoIosArrowDown className={`icono-flecha-usuario ${mostrarMenuUsuario ? "pulsado" : ""}`} />
+              {}
             </button>
             <div
               className={`menu-desplegable ${mostrarMenuUsuario ? "visible" : ""}`}
