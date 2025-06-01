@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './BarraNavegacion.css';
+// Iconos de react-icons para los botones de navegación
+import { FaCalendar, FaBook, FaTools, FaUser } from 'react-icons/fa';
 
 export default function BarraNavegacion({ setVista, cerrarSesion }) {
   const [vistaActiva, setVistaActiva] = useState("inicio");
@@ -70,21 +72,21 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
           className={vistaActiva === "inicio" ? "activo" : ""}
           onClick={() => actualizarSelector("inicio")}
         >
-          Inicio
+          <FaCalendar className="icono-inicio" />
         </button>
         <button
           data-vista="educafit"
           className={vistaActiva === "educafit" ? "activo" : ""}
           onClick={() => actualizarSelector("educafit")}
         >
-          Educafit
+          <FaBook className="icono-educafit" />
         </button>
         <button
           data-vista="herramientas"
           className={vistaActiva === "herramientas" ? "activo" : ""}
           onClick={() => actualizarSelector("herramientas")}
         >
-          Herramientas
+          <FaTools className="icono-herramientas" />
         </button>
         <div
           className={`usuario-menu ${mostrarMenuUsuario ? "activo" : ""}`}
@@ -94,7 +96,7 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
             onClick={() => setMostrarMenuUsuario((prev) => !prev)}
             className={mostrarMenuUsuario ? "boton-usuario-activo" : ""}
           >
-            Usuario
+            <FaUser className="icono-usuario" />
           </button>
           <div
             className={`menu-desplegable ${mostrarMenuUsuario ? "visible" : ""}`}
