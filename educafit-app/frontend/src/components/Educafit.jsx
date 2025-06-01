@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Educafit.css";
-import TarjetaEjercicio from "./tarjetaEjercicio"; // tarjetas con la infomración de los ejercicios
+import TarjetaEjercicio from "./tarjetaEjercicio"; // tarjetas con la información de los ejercicios
 
 export default function Educafit() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("pecho");
@@ -70,55 +70,31 @@ export default function Educafit() {
           {/* Aquí irán las tarjetas de los ejercicios según la categoría seleccionada */}
           <TarjetaEjercicio
             titulo="Press de banca"
-            imagen="https://example.com/imagen/press-banca.jpg"
+            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
           />
           <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
+            titulo="Press de banca"
+            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
           />
           <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
+            titulo="Press de banca"
+            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
           />
           <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
+            titulo="Press de banca"
+            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
           />
           <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
+            titulo="Press de banca"
+            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
           />
           <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
+            titulo="Press de banca"
+            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
           />
           <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
-          />
-          <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
-          />
-          <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
-          />
-          <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
-          />
-          <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
-          />
-          <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
-          />
-          <TarjetaEjercicio
-            titulo="Fondos en paralelas"
-            imagen="https://example.com/imagen/fondos.jpg"
+            titulo="Press de banca"
+            imagen="/src/assets/_7db04198-01f0-4c06-a59d-b7f38ea9ec9f.jpg" // Reemplazar con la ruta correcta de la imagen
           />
         </div>
       </main>
