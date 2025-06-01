@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Educafit.css";
+import TarjetaEjercicio from "./tarjetaEjercicio"; // tarjetas con la infomración de los ejercicios
 
 export default function Educafit() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("pecho");
@@ -43,16 +44,16 @@ export default function Educafit() {
         </div>
         <nav className="lista-categorias">
           {categorias.map((categoria) => (
-  <React.Fragment key={categoria.id}>
-    {categoria.id === "favoritos" && <hr className="separador-categorias" />}
-    <button
-      className={categoriaSeleccionada === categoria.id ? "activa" : ""}
-      onClick={() => setCategoriaSeleccionada(categoria.id)}
-    >
-      {categoria.nombre}
-    </button>
-  </React.Fragment>
-))}
+            <React.Fragment key={categoria.id}>
+              {categoria.id === "favoritos" && <hr className="separador-categorias" />}
+              <button
+                className={categoriaSeleccionada === categoria.id ? "activa" : ""}
+                onClick={() => setCategoriaSeleccionada(categoria.id)}
+              >
+                {categoria.nombre}
+              </button>
+            </React.Fragment>
+          ))}
         </nav>
       </aside>
 
@@ -67,86 +68,58 @@ export default function Educafit() {
 
         <div className="contenido-ejercicios">
           {/* Aquí irán las tarjetas de los ejercicios según la categoría seleccionada */}
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-          <p>Ejercicios paraaaaaaa: {categoriaSeleccionada}</p>
-
-
+          <TarjetaEjercicio
+            titulo="Press de banca"
+            imagen="https://example.com/imagen/press-banca.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
+          <TarjetaEjercicio
+            titulo="Fondos en paralelas"
+            imagen="https://example.com/imagen/fondos.jpg"
+          />
         </div>
       </main>
     </div>
