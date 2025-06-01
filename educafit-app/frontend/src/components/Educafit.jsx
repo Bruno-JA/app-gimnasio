@@ -25,7 +25,7 @@ export default function Educafit() {
   useEffect(() => {
   if (!muscleId) return; // No hacemos petición para favoritos aún
 
-  fetch(`https://wger.de/api/v2/exerciseinfo/?muscles=${muscleId}&language=4&limit=20`, {
+  fetch(`https://wger.de/api/v2/exerciseinfo/?muscles=${muscleId}&language=4&limit=50`, {
     headers: {
       Authorization: "Token c361a66e93dadfed7fcaa62c018a2356cfa86bcd"
     }
