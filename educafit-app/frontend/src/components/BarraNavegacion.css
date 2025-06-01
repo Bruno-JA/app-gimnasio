@@ -5,7 +5,7 @@
   z-index: 1000;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.5rem;
+  padding-top: 1.5rem;
   color: white;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -47,7 +47,7 @@
   background-color: #C88643;
   border-radius: 6px;
   transition: left 0.3s ease, width 0.3s ease; /** transición suave del fondo al cambiar de pestaña */
-  z-index: 0;
+  z-index: 1; /* Para que no se quede detrás del fondo */
 }
 
 /* Evitar cambio de tamaño en el texto */
@@ -65,12 +65,13 @@
 
 .usuario-menu.activo {
   background-color: #e0e0e02f; /* Gris claro */
+  top: 0;
+  bottom: 0;
 }
 
 .menu-desplegable {
   position: absolute;
-  top: 120%;
-  left: 50%;
+  top: 130%;
   transform: translateX(-50%) scaleY(0);
   transform-origin: top;
   background-color: #e0e0e0;
@@ -107,4 +108,13 @@
 
 .menu-desplegable button:hover {
   background-color: rgba(148, 148, 148, 0.411);
+}
+
+.botones-navegacion {
+  display: flex;
+  position: relative;
+  background-color: #423F3C; /* Fondo encapsulador */
+  padding: 0.5rem 0rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }

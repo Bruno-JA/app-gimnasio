@@ -67,47 +67,49 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
             width: `${posicionSelector.width}px`,
           }}
         ></div>
-        <button
-          data-vista="inicio"
-          className={vistaActiva === "inicio" ? "activo" : ""}
-          onClick={() => actualizarSelector("inicio")}
-        >
-          <FaCalendar className="icono-inicio" />
-        </button>
-        <button
-          data-vista="educafit"
-          className={vistaActiva === "educafit" ? "activo" : ""}
-          onClick={() => actualizarSelector("educafit")}
-        >
-          <FaBook className="icono-educafit" />
-        </button>
-        <button
-          data-vista="herramientas"
-          className={vistaActiva === "herramientas" ? "activo" : ""}
-          onClick={() => actualizarSelector("herramientas")}
-        >
-          <FaTools className="icono-herramientas" />
-        </button>
-        <div
-          className={`usuario-menu ${mostrarMenuUsuario ? "activo" : ""}`}
-          ref={menuRef}
-        >
+        <div className="botones-navegacion">
           <button
-            onClick={() => setMostrarMenuUsuario((prev) => !prev)}
-            className={mostrarMenuUsuario ? "boton-usuario-activo" : ""}
+            data-vista="inicio"
+            className={vistaActiva === "inicio" ? "activo" : ""}
+            onClick={() => actualizarSelector("inicio")}
           >
-            <FaUser className="icono-usuario" />
+            <FaCalendar className="icono-inicio" />
+          </button>
+          <button
+            data-vista="educafit"
+            className={vistaActiva === "educafit" ? "activo" : ""}
+            onClick={() => actualizarSelector("educafit")}
+          >
+            <FaBook className="icono-educafit" />
+          </button>
+          <button
+            data-vista="herramientas"
+            className={vistaActiva === "herramientas" ? "activo" : ""}
+            onClick={() => actualizarSelector("herramientas")}
+          >
+            <FaTools className="icono-herramientas" />
           </button>
           <div
-            className={`menu-desplegable ${mostrarMenuUsuario ? "visible" : ""}`}
+            className={`usuario-menu ${mostrarMenuUsuario ? "activo" : ""}`}
+            ref={menuRef}
           >
-            <button onClick={() => actualizarSelector("perfil")}>
-              Perfil de usuario
+            <button
+              onClick={() => setMostrarMenuUsuario((prev) => !prev)}
+              className={mostrarMenuUsuario ? "boton-usuario-activo" : ""}
+            >
+              <FaUser className="icono-usuario" />
             </button>
-            <button onClick={() => actualizarSelector("ajustes")}>
-              Ajustes
-            </button>
-            <button onClick={cerrarSesion}>Cerrar sesión</button>
+            <div
+              className={`menu-desplegable ${mostrarMenuUsuario ? "visible" : ""}`}
+            >
+              <button onClick={() => actualizarSelector("perfil")}>
+                Perfil de usuario
+              </button>
+              <button onClick={() => actualizarSelector("ajustes")}>
+                Ajustes
+              </button>
+              <button onClick={cerrarSesion}>Cerrar sesión</button>
+            </div>
           </div>
         </div>
       </nav>
