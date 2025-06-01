@@ -58,15 +58,13 @@
 .usuario-menu {
   background-color: transparent;
   border-radius: 6px;
-  transition: background-color 0.3s ease;
   position: relative;
-
+  display: flex;
+  align-items: center;
 }
 
 .usuario-menu.activo {
   background-color: #e0e0e02f; /* Gris claro */
-  top: 0;
-  bottom: 0;
 }
 
 .menu-desplegable {
@@ -76,7 +74,6 @@
   transform-origin: top;
   background-color: #e0e0e0;
   border-radius: 6px;
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -112,9 +109,10 @@
 
 .botones-navegacion {
   display: flex;
+  align-items: stretch;
   position: relative;
   background-color: #423F3C; /* Fondo encapsulador */
-  padding: 0.5rem 0rem;
+  min-height: 60px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
