@@ -78,13 +78,9 @@ function App() {
   return (
     <>
       <BarraNavegacion setVista={setVistaActual} cerrarSesion={cerrarSesion} />
-      {vistaActual === "inicio" ? (
-        renderizarContenido()
-      ) : (
-        <div className="contenedor-pagina">
-          {renderizarContenido()}
-        </div>
-      )}
+      <div className="contenedor-pagina">
+        {renderizarContenido()}
+      </div>
     </>
   );
 }
