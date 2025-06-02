@@ -10,6 +10,16 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
   const navRef = useRef();
   const menuRef = useRef(null);
 
+
+  const nombresVentanas = {
+  inicio: "Calendario Fit",
+  educafit: "EducaFit",
+  herramientas: "Herramientas",
+  perfil: "Perfil de usuario",
+};
+// map escalable de nombres de ventanas para cambiar el título de la ventana según la vista activa
+ 
+
   // Cerrar el menú si se hace clic fuera de él
   useEffect(() => {
     function manejarClickFuera(e) {
@@ -30,7 +40,7 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
   };
 
   const actualizarSelector = (nombreVista) => {
-    const vistasSinSelector = ["perfil", "ajustes"];
+    const vistasSinSelector = ["perfil"];
     // Array escalable de vistas que no deben mostrar el selector
     setVista(nombreVista);
     setVistaActiva(nombreVista);
@@ -58,9 +68,16 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
 
   return (
     <div className="barra-navegacion">
+      {/* Al pulsar sobre el logo, se renderiza la vista de inicio */}
       <div className="cabecera">
-        <img src="/src/assets/logo_app_fitness.png" alt="Logo-fit" className="logo" />
-        <span>EducaFit</span>
+        <img
+          src="/src/assets/logo_app_fitness.png"
+          alt="Logo-fit"
+          className="logo"
+          onClick={() => actualizarSelector("inicio")}
+        />
+        <span>{nombresVentanas[vistaActiva] || "Aplicación"}</span>
+        {/* Cambia el nombre de la cabecera dependiendo de la vista activa */}
       </div>
       <nav ref={navRef}>
         <div
@@ -101,7 +118,9 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
               className={mostrarMenuUsuario ? "boton-usuario-activo" : ""}
             >
               <FaUser className="icono-usuario" />
-              <IoIosArrowDown className={`icono-flecha-usuario ${mostrarMenuUsuario ? "pulsado" : ""}`} />
+              <IoIosArrowDown
+                className={`icono-flecha-usuario ${mostrarMenuUsuario ? "pulsado" : ""}`}
+              />
               {}
             </button>
             <div
@@ -109,9 +128,6 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
             >
               <button onClick={() => actualizarSelector("perfil")}>
                 Perfil de usuario
-              </button>
-              <button onClick={() => actualizarSelector("ajustes")}>
-                Ajustes
               </button>
               <button onClick={cerrarSesion}>Cerrar sesión</button>
             </div>

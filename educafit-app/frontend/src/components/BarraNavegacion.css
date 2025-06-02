@@ -20,7 +20,15 @@
 .logo {
   width: 60px; 
   height: 60px;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s ease;
 }
+
+.logo:hover {
+  opacity: 0.8;
+}
+
 
 .barra-navegacion nav {
   display: flex;
