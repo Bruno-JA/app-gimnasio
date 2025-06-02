@@ -1,16 +1,35 @@
 /* Contenedor general del calendario */
 .calendario-contenedor {
-  max-width: 800px;
+  display: flex;
   margin: 0 auto;
   padding: 2rem;
-  display: flex !important;
+  gap: 3rem;
 }
 
-.formulario-entrenamiento {
+.formulario-entrenamiento{
+  background-color: #302E2B;
+  padding: 1rem;
+  border-radius: 12px;
+  color: #f1f5f9;
+  width: 400px;
+  max-width: 400px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 100%;
+}
+
+.info-entrenamiento {
+  background-color: #302E2B;
+  padding: 1rem;
+  border-radius: 12px;
+  color: #f1f5f9;
+  width: 400px;
+  max-width: 400px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 /* Contenedor de los días del mes */
@@ -63,6 +82,7 @@
   max-width: 100%;
   font-family: Arial, sans-serif;
   padding: 20px;
+  padding-bottom: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   background-color: #f8f9fa;

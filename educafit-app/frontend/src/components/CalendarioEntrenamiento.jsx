@@ -149,64 +149,31 @@ function renderEmoji({ date, view }) {
 }
 
 return (
-  <div className='contenedor-pagina'>
-    <div className="calendario-contenedor">
-      <Calendar
-        onChange={(nuevaFecha) => {
-          setFechaSeleccionada(nuevaFecha);
-          setMostrarFormulario(false);
-          setModoEdicion(false); 
-        }}
-        onActiveStartDateChange={({ activeStartDate }) => {
-          const nuevoMes = activeStartDate.getMonth();
-          const nuevoAnio = activeStartDate.getFullYear();
-          const claveNuevoMes = `${nuevoAnio}-${nuevoMes}`;
-          if (claveNuevoMes !== mesConsultado) {
-            setMesConsultado(null);
-            setFechaSeleccionada(activeStartDate);
-          }
-        }}
-        value={fechaSeleccionada}
-        locale="es-ES"
-        tileContent={renderEmoji}
-        maxDate={new Date()}
-      />
-      <p style={{ marginTop: "1rem" }}>
-        Día seleccionado: {fechaSeleccionada.toLocaleDateString()}
-      </p>
-      {/** Si no hay información de entrenamiento y no estamos en modo edición, mostramos el formulario para añadir un nuevo entrenamiento */}
-      {!infoEntrenamiento && !modoEdicion && fechaSeleccionada <= new Date().setHours(23, 59, 59, 999) && (
-        !mostrarFormulario ? (
-          <div className="formulario-entrenamiento">
-            <p>No existe ningún entrenamiento para este día.</p>
-            <button onClick={() => setMostrarFormulario(true)}>
-              Añadir entrenamiento
-            </button>
-          </div>
-        ) : (
-          <FormularioEntrenamiento
-            fecha={fechaSeleccionada}
-            usuarioId={usuario?.id}
-            onEntrenamientoGuardado={(nuevoEntrenamiento) => {
-              const fecha = formatearFechaLocal(fechaSeleccionada);
-              setFechasConEntrenamiento(prev => {
-                const fechaFormateada = formatearFechaLocal(fechaSeleccionada);
-                return prev.includes(fechaFormateada) ? prev : [...prev, fechaFormateada];
-              });
-              setEntrenamientosCache(prev => ({
-                ...prev,
-                [fecha]: nuevoEntrenamiento
-              }));
-              setInfoEntrenamiento(nuevoEntrenamiento);
-              setMostrarFormulario(false);
-            }}
-            onCancelar={() => setMostrarFormulario(false)}
-          />
-        )
-      )}
-    </div>
-
-    {(infoEntrenamiento && !modoEdicion) && (
+  <div className="calendario-contenedor">
+    <Calendar
+      onChange={(nuevaFecha) => {
+    setFechaSeleccionada(nuevaFecha);
+    setMostrarFormulario(false);
+    setModoEdicion(false); 
+    // Oculta el formulario si se selecciona otra fecha tanto al añadir como modificar el entrenamiento
+  }}
+  onActiveStartDateChange={({ activeStartDate }) => {
+    // Permite actualizar el mes consultado al cambiar de mes dentro del calendario
+    const nuevoMes = activeStartDate.getMonth();
+    const nuevoAnio = activeStartDate.getFullYear();
+    const claveNuevoMes = `${nuevoAnio}-${nuevoMes}`;
+    if (claveNuevoMes !== mesConsultado) {
+      setMesConsultado(null); // Fuerza al useEffect a volver a consultar el nuevo mes
+      setFechaSeleccionada(activeStartDate); // Actualiza la fecha para que se ejecute el useEffect
+    }
+  }}
+      value={fechaSeleccionada}
+      locale="es-ES"
+      tileContent={renderEmoji}
+      maxDate={new Date()} // No permitir seleccionar fechas futuras (por ahora no se puede viajar al futuro)
+    />
+    {infoEntrenamiento && !modoEdicion ? ( 
+      // Mostrar información del entrenamiento si existe y comprobar que no estamos en modo edición.
       <div className="info-entrenamiento">
         <h3>Entrenamiento del {fechaSeleccionada.toLocaleDateString()}</h3>
         <p>
@@ -223,40 +190,72 @@ return (
         </p>
         {infoEntrenamiento.notas && (
           <p>
-            <strong>Notas:</strong> {infoEntrenamiento.notas}
+        <strong>Notas:</strong> {infoEntrenamiento.notas}
           </p>
         )}
         <button onClick={() => setModoEdicion(true)}>
+          {/* se habilita el modo edición al pulsar este botón */}
           Editar entrenamiento
         </button>
         <button onClick={eliminarEntrenamiento}>
           Eliminar entrenamiento
         </button>
       </div>
+    ) : null}
+    {modoEdicion && ( // Si estamos en modo edición, mostramos el formulario de entrenamiento y mostramos la información del entrenamiento previo
+      <FormularioEntrenamiento
+        fecha={fechaSeleccionada}
+        usuarioId={usuario?.id}
+        entrenamientoPrevio={infoEntrenamiento}
+        enEdicion={true}
+        onEntrenamientoGuardado={(entrenamientoActualizado) => {
+          const fecha = formatearFechaLocal(fechaSeleccionada);
+          setEntrenamientosCache(prev => ({
+            ...prev,
+            [fecha]: entrenamientoActualizado
+          }));
+          setInfoEntrenamiento(entrenamientoActualizado);
+          setModoEdicion(false);
+          setMostrarFormulario(false);
+        }}
+        onCancelar={() => {
+          setModoEdicion(false);
+        }}
+      />
     )}
 
-    {modoEdicion && (
-      <div className="info-entrenamiento">
+    { /** Si no hay información de entrenamiento y no estamos en modo edición, mostramos el formulario para añadir un nuevo entrenamiento */}
+    {!infoEntrenamiento && !modoEdicion && fechaSeleccionada <= new Date().setHours(23, 59, 59, 999) && (
+      !mostrarFormulario ? (
+        <div className="formulario-entrenamiento">
+          <p>No existe ningún entrenamiento para este día.</p>
+          <button onClick={() => setMostrarFormulario(true)}>
+            Añadir entrenamiento
+          </button>
+        </div>
+      ) : (
         <FormularioEntrenamiento
           fecha={fechaSeleccionada}
           usuarioId={usuario?.id}
-          entrenamientoPrevio={infoEntrenamiento}
-          enEdicion={true}
-          onEntrenamientoGuardado={(entrenamientoActualizado) => {
+          onEntrenamientoGuardado={(nuevoEntrenamiento) => {
             const fecha = formatearFechaLocal(fechaSeleccionada);
+
+            // Actualizar la caché con el nuevo entrenamiento añadido
+            setFechasConEntrenamiento(prev => {
+              const fechaFormateada = formatearFechaLocal(fechaSeleccionada);
+              return prev.includes(fechaFormateada) ? prev : [...prev, fechaFormateada];
+            });
+
             setEntrenamientosCache(prev => ({
               ...prev,
-              [fecha]: entrenamientoActualizado
+              [fecha]: nuevoEntrenamiento
             }));
-            setInfoEntrenamiento(entrenamientoActualizado);
-            setModoEdicion(false);
+            setInfoEntrenamiento(nuevoEntrenamiento);
             setMostrarFormulario(false);
           }}
-          onCancelar={() => {
-            setModoEdicion(false);
-          }}
+          onCancelar={() => setMostrarFormulario(false)}
         />
-      </div>
+      )
     )}
   </div>
 );

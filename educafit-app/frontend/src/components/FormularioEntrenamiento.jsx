@@ -71,7 +71,7 @@ const manejarEnvio = async (e) => {
 
 
   return (
-    <form onSubmit={manejarEnvio} className="formulario-entrenamiento">
+    <form onSubmit={manejarEnvio} className={entrenamientoExistente ? '' : 'formulario-entrenamiento'}>
       <h3>{entrenamientoExistente ? 'Editar' : 'Registrar'} entrenamiento del {new Date(fecha).toLocaleDateString()}</h3>
 
       <input
@@ -103,7 +103,7 @@ const manejarEnvio = async (e) => {
       />
 
       <button type="submit">{entrenamientoExistente ? 'Guardar cambios' : 'Guardar entrenamiento'}</button>
-      <button type="button" onClick={onCancelar} style={{ marginLeft: '1rem' }}>
+      <button type="button" onClick={onCancelar} >
         Cancelar
       </button>
       {/* botón para cancelar la edición o registro del entrenamiento */}
