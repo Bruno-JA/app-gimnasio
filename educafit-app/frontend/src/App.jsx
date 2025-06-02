@@ -5,7 +5,7 @@ import BarraNavegacion from "./components/BarraNavegacion";
 import CalendarioEntrenamiento from "./components/CalendarioEntrenamiento";
 import Educafit from "./components/Educafit";
 import Herramientas from "./components/Herramientas";
-import Usuario from "./components/Usuario";
+import PerfilUsuario from "./components/perfilUsuario";
 import "./main.css";
 
 function App() {
@@ -68,8 +68,8 @@ function App() {
         return <Educafit />;
       case "herramientas":
         return <Herramientas />;
-      case "usuario":
-        return <Usuario usuario={usuarioAutenticado} />;
+      case "perfil":
+        return <PerfilUsuario usuario={usuarioAutenticado} />;
       default:
         return <p>Vista no válida</p>;
     }
@@ -78,9 +78,13 @@ function App() {
   return (
     <>
       <BarraNavegacion setVista={setVistaActual} cerrarSesion={cerrarSesion} />
-      <div className="contenedor-pagina">
-        {renderizarContenido()}
-      </div>
+      {vistaActual === "inicio" ? (
+        renderizarContenido()
+      ) : (
+        <div className="contenedor-pagina">
+          {renderizarContenido()}
+        </div>
+      )}
     </>
   );
 }
