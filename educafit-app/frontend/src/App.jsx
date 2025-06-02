@@ -13,17 +13,27 @@ function App() {
   const [mostrarRegistro, setMostrarRegistro] = useState(false);
   const [vistaActual, setVistaActual] = useState("inicio");
 
+  /** Verifica que hay un usuario autenticado al cargar la aplicación */
   useEffect(() => {
-    const datosGuardados = localStorage.getItem("usuario");
-    if (datosGuardados) {
-      setUsuarioAutenticado(JSON.parse(datosGuardados));
-    }
-  }, []);
+  const datosGuardados = localStorage.getItem("usuario");
+  if (datosGuardados) {
+    setUsuarioAutenticado(JSON.parse(datosGuardados));
+  }
+}, []);
 
+
+/** Cierra la sesión del usuario, eliminando los datos guardados en localStorage 
+ * y actualizando el estado de usuarioAutenticado a null, por lo que se vuelve a cargar el useEffect
+ * y cambia automáticamente a la pantalla de inicio de sesión */
   const cerrarSesion = () => {
+  if (!usuarioAutenticado) return; // Si no hay usuario autenticado, no hacemos nada
+  // Confirmación antes de cerrar sesión
+  const confirmacion = window.confirm("¿Estás seguro de que quieres cerrar sesión?");
+  if (confirmacion) {
     localStorage.removeItem("usuario");
     setUsuarioAutenticado(null);
-  };
+  }
+};
 
   if (!usuarioAutenticado) {
     return (
@@ -59,7 +69,7 @@ function App() {
       case "herramientas":
         return <Herramientas />;
       case "usuario":
-        return <Usuario cerrarSesion={cerrarSesion} usuario={usuarioAutenticado} />;
+        return <Usuario usuario={usuarioAutenticado} />;
       default:
         return <p>Vista no válida</p>;
     }
@@ -67,7 +77,7 @@ function App() {
 
   return (
     <>
-      <BarraNavegacion setVista={setVistaActual} />
+      <BarraNavegacion setVista={setVistaActual} cerrarSesion={cerrarSesion} />
       <div className="contenedor-pagina">
         {renderizarContenido()}
       </div>
