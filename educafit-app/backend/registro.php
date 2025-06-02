@@ -31,8 +31,26 @@ if ($check->rowCount() > 0) {
     exit;
 }
 
-// Insertar nuevo usuario
-$stmt = $pdo->prepare("INSERT INTO usuarios (nombre_usuario, contraseña, nombre) VALUES (?, ?, ?)");
-$stmt->execute([$nombre_usuario, $contraseña, $nombre]);
+try {
+    // Iniciar transacción
+    $pdo->beginTransaction();
 
-echo json_encode(["success" => true, "message" => "Usuario registrado correctamente"]);
+    // Insertar nuevo usuario
+    $stmt = $pdo->prepare("INSERT INTO usuarios (nombre_usuario, contraseña, nombre) VALUES (?, ?, ?)");
+    $stmt->execute([$nombre_usuario, $contraseña, $nombre]);
+
+    // Obtener el ID del nuevo usuario
+    $usuario_id = $pdo->lastInsertId();
+
+    // Crear entrada vacía en datos_usuario (puedes modificar si deseas valores por defecto)
+    $stmtDatos = $pdo->prepare("INSERT INTO datos_usuario (usuario_id) VALUES (?)");
+    $stmtDatos->execute([$usuario_id]);
+
+    // Confirmar transacción
+    $pdo->commit();
+
+    echo json_encode(["success" => true, "message" => "Usuario registrado correctamente"]);
+} catch (Exception $e) {
+    $pdo->rollBack();
+    echo json_encode(["success" => false, "message" => "Error al registrar usuario", "error" => $e->getMessage()]);
+}
