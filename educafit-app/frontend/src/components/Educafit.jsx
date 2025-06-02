@@ -25,34 +25,40 @@ export default function Educafit() {
   useEffect(() => {
   if (!muscleId) return; // No hacemos petición para favoritos aún
 
-  fetch(`https://wger.de/api/v2/exerciseinfo/?muscles=${muscleId}&limit=50`, {
-    headers: {
-      Authorization: "Token c361a66e93dadfed7fcaa62c018a2356cfa86bcd"
+  fetch(
+    `https://wger.de/api/v2/exerciseinfo/?muscles=${muscleId}&limit=50`,
+    {
+      headers: {
+        Authorization: "Token c361a66e93dadfed7fcaa62c018a2356cfa86bcd",
+      },
     }
-  })
-    .then(res => res.json())
-    .then(data => {
+  )
+    .then((res) => res.json())
+    .then((data) => {
       const ejerciciosFormateados = data.results
-        .map(ej => {
-          const traduccion = ej.translations.find(t => t.language === 4 || t.language === 2); // Español o Inglés
+        .map((ej) => {
+          const traduccion = ej.translations.find(
+            (t) => t.language === 4 || t.language === 2
+          ); // Ejercicios en Español o Inglés
+
           const instrucciones = traduccion?.description
             ?.split(".")
-            .map(i => i.trim())
-            .filter(i => i.length > 0);
+            .map((i) => i.trim())
+            .filter((i) => i.length > 0);
 
           return {
             id: ej.id,
             nombre: traduccion?.name?.trim(),
             imagen: ej.images[0]?.image,
             grupo_principal: ej.category.name,
-            grupos_secundarios: ej.muscles_secondary.map(m => m.name),
-            equipamiento: ej.equipment.map(e => e.name).join(", "),
+            grupos_secundarios: ej.muscles_secondary.map((m) => m.name),
+            equipamiento: ej.equipment.map((e) => e.name).join(", "),
             instrucciones: instrucciones,
-            video: ej.videos?.[0]?.video || null,
+            video: ej.videos?.[0]?.video || null, // Video del ejercicio, si no hay no se muestra nada
           };
         })
         .filter(
-          ej =>
+          (ej) =>
             ej.nombre &&
             ej.imagen &&
             ej.instrucciones &&
@@ -68,6 +74,7 @@ export default function Educafit() {
   const ejerciciosFiltrados = ejercicios.filter(ej =>
     ej.nombre.toLowerCase().includes(busqueda.toLowerCase())
   );
+
 
   return (
     <div className="educafit-contenedor">
