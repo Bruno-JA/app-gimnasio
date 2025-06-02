@@ -37,6 +37,7 @@ export default function Login({ alIniciarSesion }) {
 
   return (
     <div className="form-registro">
+      <img src="/src/assets/logo_app_fitness.png" alt="Logo" className="logo-login"/>
       <h2>Iniciar sesión</h2>
       <form onSubmit={enviarFormulario}>
         <input

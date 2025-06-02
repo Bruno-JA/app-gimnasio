@@ -1,16 +1,15 @@
 .form-registro {
-  max-width: 400px;
+  max-width: 300px;
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 1rem;
-  background-color: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #e0e0e02f;
 }
 
 .form-registro h2 {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .form-registro form {
@@ -28,7 +27,7 @@
 
 .form-registro button {
   padding: 0.75rem;
-  background-color: #3b82f6;
+  background-color: #C88643;
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -38,7 +37,7 @@
 }
 
 .form-registro button:hover {
-  background-color: #2563eb;
+  background-color: #9e6a35;
 }
 
 .form-registro p {
@@ -76,12 +75,12 @@
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
-  color: #444;
+  color: #ffffff;
 }
 
 .cambio-formulario button {
   background-color: transparent;
-  color: #2563eb;
+  color: #C88643;
   border: none;
   font-size: 1rem;
   cursor: pointer;
@@ -90,5 +89,13 @@
 }
 
 .cambio-formulario button:hover {
-  color: #1d4ed8;
+  color: #9e6a35;
+}
+
+.logo-login {
+  width: 120px;
+  height: 120px;
+  padding-bottom: 1rem;
+  margin: 0 auto 1rem;
+  display: block;
 }

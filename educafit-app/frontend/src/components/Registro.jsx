@@ -32,6 +32,7 @@ export default function Registro() {
 
   return (
     <div className="form-registro">
+      <img src="/src/assets/logo_app_fitness.png" alt="Logo" className="logo-login"/>
       <h2>Registro</h2>
       <form onSubmit={registrarUsuario}>
         <input
