@@ -25,7 +25,7 @@ export default function Educafit() {
   useEffect(() => {
   if (!muscleId) return; // No hacemos petición para favoritos aún
 
-  fetch(`https://wger.de/api/v2/exerciseinfo/?muscles=${muscleId}&language=4&limit=50`, {
+  fetch(`https://wger.de/api/v2/exerciseinfo/?muscles=${muscleId}&limit=50`, {
     headers: {
       Authorization: "Token c361a66e93dadfed7fcaa62c018a2356cfa86bcd"
     }
@@ -47,7 +47,8 @@ export default function Educafit() {
             grupo_principal: ej.category.name,
             grupos_secundarios: ej.muscles_secondary.map(m => m.name),
             equipamiento: ej.equipment.map(e => e.name).join(", "),
-            instrucciones
+            instrucciones: instrucciones,
+            video: ej.videos?.[0]?.video || null,
           };
         })
         .filter(

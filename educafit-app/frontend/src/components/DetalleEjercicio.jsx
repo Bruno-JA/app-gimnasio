@@ -23,7 +23,7 @@ export default function DetalleEjercicio({ ejercicio, onVolver }) {
         </p>
         <p>
           <strong>Grupos secundarios:</strong>{' '}
-          {ejercicio.grupos_secundarios?.join(', ') || 'N/A'}
+          {ejercicio.grupos_secundarios?.join(', ') || 'Ninguno'}
         </p>
         <p>
           <strong>Equipamiento:</strong> {ejercicio.equipamiento || 'Ninguno'}
@@ -35,6 +35,16 @@ export default function DetalleEjercicio({ ejercicio, onVolver }) {
           className="descripcion-html"
           dangerouslySetInnerHTML={{ __html: ejercicio.instrucciones }}
         ></div>
+
+        {ejercicio.video && (
+          <div className="video-ejercicio">
+            <h3>Ejemplo en video</h3>
+            <video controls width="100%">
+              <source src={ejercicio.video} type="video/mp4" />
+              Tu navegador no soporta el tag de video.
+            </video>
+          </div>
+        )}
       </div>
     </div>
   );
