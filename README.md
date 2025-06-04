@@ -4,19 +4,19 @@ Aplicación web desarrollada como parte del Proyecto de Fin de Grado del curso 2
 
 ---
 
-## 🚀 Funcionalidades principales
+## Funcionalidades principales
 
-- 🔐 Registro e inicio de sesión de usuarios.
-- 🏋️ Registro personalizado de entrenamientos diarios con ejercicios, series, repeticiones y peso.
-- 📅 Calendario visual que muestra:
-  - 🏋️‍♀️ Días con entrenamiento registrado.
-  - 🔴 Días sin actividad.
-- 📚 Portal educativo con ejercicios de pesas conectados a la API de [WGER](https://wger.de/es/software/api).
-- 🧮 Herramientas de cálculo rápidas para 1RM, volumen total levantado, etc.
+- Registro e inicio de sesión de usuarios.
+- Registro personalizado de entrenamientos diarios con ejercicios, series, repeticiones y peso.
+- Calendario visual que muestra:
+  - Días con entrenamiento registrado.
+  - Días sin actividad.
+- Portal educativo con ejercicios de pesas conectados a la API de [WGER](https://wger.de/es/software/api).
+- Herramientas de cálculo rápidas para 1RM, volumen total levantado, etc.
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+## Tecnologías empleadas
 
 - **Frontend:** React + Vite + HTML + CSS
 - **Backend:** PHP
