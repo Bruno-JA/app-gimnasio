@@ -1,6 +1,6 @@
-# 💪 EducaFit – Aplicación de entrenamiento en línea
+# Aplicación de entrenamiento en línea
 
-**EducaFit** es una aplicación web desarrollada como parte del Proyecto de Fin de Grado del curso 2025 de DAW en el IES Torrevigía, centrada en el seguimiento y registro de entrenamientos de levantamiento de pesas. Su objetivo principal es facilitar al usuario el control de su progreso mediante una interfaz clara, educativa y práctica.
+Aplicación web desarrollada como parte del Proyecto de Fin de Grado del curso 2025 de DAW en el IES Torrevigía, centrada en el seguimiento y registro de entrenamientos de levantamiento de pesas. Su objetivo principal es facilitar al usuario el control de su progreso mediante una interfaz clara, educativa y práctica.
 
 ---
 
@@ -12,7 +12,6 @@
   - 🏋️‍♀️ Días con entrenamiento registrado.
   - 🔴 Días sin actividad.
 - 📚 Portal educativo con ejercicios de pesas conectados a la API de [WGER](https://wger.de/es/software/api).
-- ⭐ Sistema de favoritos para acceder rápidamente a los ejercicios más usados.
 - 🧮 Herramientas de cálculo rápidas para 1RM, volumen total levantado, etc.
 
 ---
