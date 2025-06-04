@@ -11,7 +11,9 @@ html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.contenedor-principal { /* Contenedor principal que ocupa toda la pantalla y encapsula todo el contenido de la web */
+.contenedor-principal { 
+  /* Contenedor principal que ocupa toda la pantalla y encapsula 
+  todo el contenido de la web */
   width: calc(100vw - 4rem);
   max-width: 1600px;
   height: calc(100vh - 4rem);
@@ -27,7 +29,8 @@ html, body {
   overflow-y: auto; /* solo scroll si de verdad hay mucho contenido */
 }
 
-.contenedor-pagina { /* Contenedor con el contenido principal de la página seleccionada*/
+.contenedor-pagina { 
+  /* Contenedor con el contenido principal de la pestaña seleccionada*/
   margin-top: 1rem;
   border-radius: 16px;
   flex: 1;

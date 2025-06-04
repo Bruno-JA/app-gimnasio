@@ -202,7 +202,9 @@ return (
         </button>
       </div>
     ) : null}
-    {modoEdicion && ( // Si estamos en modo edición, mostramos el formulario de entrenamiento y mostramos la información del entrenamiento previo
+    {modoEdicion && ( 
+      /* Si estamos en modo edición, mostramos el formulario de entrenamiento
+       y la información del entrenamiento previo*/
       <FormularioEntrenamiento
         fecha={fechaSeleccionada}
         usuarioId={usuario?.id}
