@@ -11,7 +11,6 @@
   flex-direction: column;
   padding: 2rem 1rem;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
-  position: sticky; /* O fixed si lo prefieres fijo sobre todo */
   top: 0; /* Para que se mantenga en la parte superior al hacer scroll */
   overflow-y: auto;
   z-index: 99999; /* Asegura que esté por encima del contenido principal */
@@ -99,6 +98,6 @@
 .separador-categorias {
   border: none;
   height: 1px;
-  background-color: #f1f5f9; /* un gris suave */
+  background-color: #f1f5f9;
   margin: 1rem 0;
 }

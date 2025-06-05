@@ -15,7 +15,7 @@ export default function Educafit() {
     { id: "piernas", nombre: "Piernas", muscleId: 10 },
     { id: "espalda", nombre: "Espalda", muscleId: 12 },
     { id: "hombros", nombre: "Hombros", muscleId: 2 },
-    { id: "brazos", nombre: "Brazos", muscleId: 5 }, // Triceps como ejemplo
+    { id: "brazos", nombre: "Brazos", muscleId: 5 },
     { id: "core", nombre: "Core", muscleId: 6 },
     { id: "favoritos", nombre: "Favoritos ⭐", muscleId: null }
   ];

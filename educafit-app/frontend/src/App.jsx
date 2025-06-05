@@ -22,9 +22,7 @@ function App() {
 }, []);
 
 
-/** Cierra la sesión del usuario, eliminando los datos guardados en localStorage 
- * y actualizando el estado de usuarioAutenticado a null, por lo que se vuelve a cargar el useEffect
- * y cambia automáticamente a la pantalla de inicio de sesión */
+/** Cierra la sesión del usuario, eliminando los datos guardados en localStorage */
   const cerrarSesion = () => {
   if (!usuarioAutenticado) return; // Si no hay usuario autenticado, no hacemos nada
   // Confirmación antes de cerrar sesión
