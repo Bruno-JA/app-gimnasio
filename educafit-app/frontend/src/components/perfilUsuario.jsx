@@ -11,7 +11,7 @@ export default function PerfilUsuario({ usuario }) {
 
   useEffect(() => {
     // Llamada para obtener los datos actuales del usuario
-    fetch(`http://localhost/app-gimnasio/educafit-app/backend/obtenerDatosUsuario.php?id_usuario=${usuario.id}`)
+    fetch(`backend/obtenerDatosUsuario.php?id_usuario=${usuario.id}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -31,7 +31,7 @@ export default function PerfilUsuario({ usuario }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    fetch("http://localhost/app-gimnasio/educafit-app/backend/actualizarDatosUsuario.php", {
+    fetch("backend/actualizarDatosUsuario.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

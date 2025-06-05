@@ -46,7 +46,7 @@ const manejarEnvio = async (e) => {
 
     setTimeout(async () => {
       const consulta = await fetch(
-        "../backend/entrenamientoPorFecha.php",
+        "backend/entrenamientoPorFecha.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

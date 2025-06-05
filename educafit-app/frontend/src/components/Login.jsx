@@ -18,7 +18,7 @@ export default function Login({ alIniciarSesion }) {
     setMensaje("");
     setTipoMensaje("");
 
-    const res = await fetch("http://localhost/app-gimnasio/educafit-app/backend/login.php", {
+    const res = await fetch("backend/login.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datosFormulario)
@@ -37,7 +37,7 @@ export default function Login({ alIniciarSesion }) {
 
   return (
     <div className="form-registro">
-      <img src="http://localhost/app-gimnasio/educafit-app/frontend/src/assets/logo_app_fitness.png" 
+      <img src="frontend/src/assets/logo_app_fitness.png" 
       alt="Logo" 
       className="logo-login"/>
       <h2>Iniciar sesión</h2>

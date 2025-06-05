@@ -19,7 +19,7 @@ export default function Registro() {
     setMensaje("");
     setTipoMensaje("");
 
-    const res = await fetch("../backend/registro.php", {
+    const res = await fetch("backend/registro.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datosFormulario),
