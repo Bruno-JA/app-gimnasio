@@ -71,7 +71,7 @@ export default function BarraNavegacion({ setVista, cerrarSesion }) {
       {/* Al pulsar sobre el logo, se renderiza la vista de inicio */}
       <div className="cabecera">
         <img
-          src="http://54.166.238.133/app-gimnasio/educafit-app/fronted/src/assets/logo_app_fitness.png"
+          src="fronted/src/assets/logo_app_fitness.png"
           alt="Logo-fit"
           className="logo"
           onClick={() => actualizarSelector("inicio")}
