@@ -18,7 +18,7 @@ export default function Login({ alIniciarSesion }) {
     setMensaje("");
     setTipoMensaje("");
 
-    const res = await fetch("../backend/login.php", {
+    const res = await fetch("http://54.166.238.133/app-gimnasio/educafit-app/backend/login.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datosFormulario)

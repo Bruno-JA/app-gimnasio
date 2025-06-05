@@ -23,8 +23,8 @@ const manejarEnvio = async (e) => {
 
   const fechaNormalizada = formatearFechaLocal(new Date(fecha));
   const url = enEdicion
-    ? "http://localhost/app-gimnasio/educafit-app/backend/actualizarEntrenamiento.php"
-    : "http://localhost/app-gimnasio/educafit-app/backend/guardarEntrenamiento.php";
+    ? "http://54.166.238.133/app-gimnasio/educafit-app/backend/actualizarEntrenamiento.php"
+    : "http://54.166.238.133/app-gimnasio/educafit-app/backend/guardarEntrenamiento.php";
 
   const res = await fetch(url, {
     method: "POST",

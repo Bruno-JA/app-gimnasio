@@ -32,7 +32,7 @@ export default function Registro() {
 
   return (
     <div className="form-registro">
-      <img src="src/assets/logo_app_fitness.png" 
+      <img src="http://54.166.238.133/app-gimnasio/educafit-app/frontend/src/assets/logo_app_fitness.png" 
       alt="Logo" 
       className="logo-login"/>
       <h2>Registro</h2>
