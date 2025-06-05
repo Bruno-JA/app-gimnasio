@@ -23,8 +23,8 @@ const manejarEnvio = async (e) => {
 
   const fechaNormalizada = formatearFechaLocal(new Date(fecha));
   const url = enEdicion
-    ? "backend/actualizarEntrenamiento.php"
-    : "backend/guardarEntrenamiento.php";
+    ? "/backend/actualizarEntrenamiento.php"
+    : "/backend/guardarEntrenamiento.php";
 
   const res = await fetch(url, {
     method: "POST",
@@ -46,7 +46,7 @@ const manejarEnvio = async (e) => {
 
     setTimeout(async () => {
       const consulta = await fetch(
-        "backend/entrenamientoPorFecha.php",
+        "/backend/entrenamientoPorFecha.php",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

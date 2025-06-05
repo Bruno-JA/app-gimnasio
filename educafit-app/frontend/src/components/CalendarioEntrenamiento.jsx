@@ -34,7 +34,7 @@ useEffect(() => {
   const fecha_inicio = formatearFechaLocal(primerDiaDelMes);
   const fecha_fin = formatearFechaLocal(ultimoDiaDelMes);
 
-  fetch("backend/obtenerEntrenamientos.php", {
+  fetch("/backend/obtenerEntrenamientos.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -68,7 +68,7 @@ useEffect(() => {
   }
 
   // Si no está en la caché, lo pedimos al servidor
-  fetch("backend/entrenamientoPorFecha.php", {
+  fetch("/backend/entrenamientoPorFecha.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -98,7 +98,7 @@ const eliminarEntrenamiento = async () => {
   if (!confirmar) return;
 
   const res = await fetch(
-    "backend/eliminarEntrenamiento.php",
+    "/backend/eliminarEntrenamiento.php",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

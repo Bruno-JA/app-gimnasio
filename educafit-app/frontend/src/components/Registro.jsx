@@ -19,7 +19,7 @@ export default function Registro() {
     setMensaje("");
     setTipoMensaje("");
 
-    const res = await fetch("backend/registro.php", {
+    const res = await fetch("/backend/registro.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datosFormulario),
@@ -32,7 +32,7 @@ export default function Registro() {
 
   return (
     <div className="form-registro">
-      <img src="frontend/src/assets/logo_app_fitness.png" 
+      <img src="/frontend/src/assets/logo_app_fitness.png" 
       alt="Logo" 
       className="logo-login"/>
       <h2>Registro</h2>
